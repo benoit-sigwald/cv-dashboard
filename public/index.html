@@ -112,7 +112,8 @@ async function load(){
   btn.disabled=true; ic.outerHTML='<span class="spin" id="ricon"></span>';
   document.getElementById('error').innerHTML='';
   try{
-    const r=await fetch('api/applications',{cache:'no-store'});
+    const bp=(location.pathname.endsWith('/')?location.pathname:location.pathname+'/');
+    const r=await fetch(bp+'api/applications',{cache:'no-store'});
     const j=await r.json();
     if(!j.ok) throw new Error(j.error||'API error');
     DATA=j.rows; render();
