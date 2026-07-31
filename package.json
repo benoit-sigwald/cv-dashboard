@@ -1,0 +1,8 @@
+{
+  "name": "cv-dashboard",
+  "version": "1.0.0",
+  "description": "Live dashboard of cv_applications (OCI PostgREST) — refresh button, rému column first.",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}

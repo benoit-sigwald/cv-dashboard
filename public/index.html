@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<base href="./" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Candidatures — Benoît SIGWALD</title>
+<style>
+  :root { --blue:#1F4E79; --line:#e4e4e4; --bg:#f4f6f9; --gray:#6b7280; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:Calibri,'Segoe UI',system-ui,Arial,sans-serif; color:#1f2430; background:var(--bg); }
+  header { background:var(--blue); color:#fff; padding:16px 22px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  header h1 { font-size:19px; margin:0; font-weight:600; }
+  header .meta { font-size:13px; opacity:.85; }
+  .spacer { flex:1; }
+  button { background:#fff; color:var(--blue); border:0; border-radius:6px; padding:8px 16px; font-size:14px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:8px; }
+  button:hover { background:#eef3f9; }
+  button:disabled { opacity:.6; cursor:default; }
+  .wrap { padding:18px 22px 40px; }
+  .kpis { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
+  .kpi { background:#fff; border-radius:10px; padding:10px 16px; box-shadow:0 1px 2px rgba(0,0,0,.05); min-width:96px; }
+  .kpi .n { font-size:22px; font-weight:700; }
+  .kpi .l { font-size:12px; color:var(--gray); text-transform:uppercase; letter-spacing:.03em; }
+  table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.06); font-size:14px; }
+  th,td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { background:#eef2f7; color:var(--blue); font-weight:600; position:sticky; top:0; cursor:pointer; white-space:nowrap; }
+  tr:hover td { background:#f7fafd; }
+  td.remu { font-weight:600; color:#0f2c4d; white-space:nowrap; }
+  td.rank { color:var(--gray); width:34px; }
+  td.ats b { display:inline-block; min-width:30px; text-align:center; background:#eef2f7; color:var(--blue); border-radius:5px; padding:1px 6px; }
+  .badge { display:inline-block; padding:2px 9px; border-radius:20px; font-size:12px; font-weight:600; white-space:nowrap; }
+  .b-interview { background:#e1f5ee; color:#0f6e56; }
+  .b-rejected { background:#fceaea; color:#a32d2d; }
+  .b-sent { background:#eef1f5; color:#5f6b7a; }
+  .b-draft { background:#faeeda; color:#854f0b; }
+  .err { background:#fceaea; color:#a32d2d; padding:12px 16px; border-radius:8px; margin-bottom:14px; }
+  .foot { color:var(--gray); font-size:12px; margin-top:14px; }
+  .spin { width:14px; height:14px; border:2px solid var(--blue); border-top-color:transparent; border-radius:50%; animation:s .7s linear infinite; }
+  @keyframes s { to { transform:rotate(360deg); } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Candidatures — Benoît SIGWALD</h1>
+  <span class="meta" id="meta"></span>
+  <span class="spacer"></span>
+  <button id="refresh" onclick="load()"><span id="ricon">⟳</span> Refresh</button>
+</header>
+<div class="wrap">
+  <div class="kpis" id="kpis"></div>
+  <div id="error"></div>
+  <table id="tbl">
+    <thead>
+      <tr>
+        <th data-k="rank">#</th>
+        <th data-k="remu">Rému cible</th>
+        <th data-k="company">Entreprise</th>
+        <th data-k="role">Poste</th>
+        <th data-k="location">Lieu</th>
+        <th data-k="ats">ATS</th>
+        <th data-k="status">Statut</th>
+      </tr>
+    </thead>
+    <tbody id="rows"><tr><td colspan="7" style="padding:24px;color:#6b7280">Chargement…</td></tr></tbody>
+  </table>
+  <div class="foot" id="foot"></div>
+</div>
+<script>
+const STATUS = { interview:['Entretien','b-interview'], rejected:['Rejeté','b-rejected'], sent:['Envoyé','b-sent'], draft:['Brouillon','b-draft'] };
+let DATA = [], sortK='ats', sortDir=-1;
+
+function remu(sb){
+  if(!sb) return '—';
+  const p=[]; const g=(k)=>sb[k];
+  if(g('range_year_eur')) p.push(g('range_year_eur')+' €/an');
+  else if(g('base_year_eur')||g('package_year_eur')) p.push((g('base_year_eur')||'')+ (g('package_year_eur')?(' · pkg '+g('package_year_eur')):'') );
+  else if(g('range_year')) p.push(g('range_year')+' '+(g('currency')||''));
+  else if(g('base_year_'+ (g('currency')||'').toLowerCase())) p.push(g('base_year_'+(g('currency')||'').toLowerCase())+' '+(g('currency')||''));
+  if(g('day_rate')) p.push('TJM '+g('day_rate')+' €/j');
+  if(g('fourchette_profil') && !p.length) p.push(String(g('fourchette_profil')).slice(0,60));
+  if(!p.length){ const v=Object.values(sb).find(x=>typeof x==='string'); return v?String(v).slice(0,50):'—'; }
+  return p.join(' · ');
+}
+function badge(s){ const [t,c]=STATUS[s]||[s||'—','b-sent']; return '<span class="badge '+c+'">'+t+'</span>'; }
+function esc(x){ return (x==null?'':String(x)).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+
+function render(){
+  const rows = DATA.slice().sort((a,b)=>{
+    let va,vb;
+    if(sortK==='ats'){ va=a.ats_score_after||0; vb=b.ats_score_after||0; }
+    else if(sortK==='remu'){ va=remu(a.salary_benchmark); vb=remu(b.salary_benchmark); }
+    else { va=(a[sortK==='company'?'company':sortK==='role'?'role':sortK==='location'?'location':sortK==='status'?'status':'company']||''); vb=(b[sortK==='company'?'company':sortK==='role'?'role':sortK==='location'?'location':sortK==='status'?'status':'company']||''); }
+    return (va<vb?-1:va>vb?1:0)*sortDir;
+  });
+  document.getElementById('rows').innerHTML = rows.map((r,i)=>
+    '<tr><td class="rank">'+(i+1)+'</td>'+
+    '<td class="remu">'+esc(remu(r.salary_benchmark))+'</td>'+
+    '<td><b>'+esc(r.company)+'</b></td>'+
+    '<td>'+esc(r.role)+'</td>'+
+    '<td>'+esc(r.location||'—')+'</td>'+
+    '<td class="ats">'+(r.ats_score_after?('<b>'+r.ats_score_after+'</b>'):'—')+'</td>'+
+    '<td>'+badge(r.status)+'</td></tr>'
+  ).join('');
+  const c=(s)=>DATA.filter(r=>r.status===s).length;
+  document.getElementById('kpis').innerHTML =
+    kpi(DATA.length,'Total') + kpi(c('interview'),'Entretiens') + kpi(c('rejected'),'Rejets') + kpi(c('sent'),'En attente');
+}
+function kpi(n,l){ return '<div class="kpi"><div class="n">'+n+'</div><div class="l">'+l+'</div></div>'; }
+
+async function load(){
+  const btn=document.getElementById('refresh'), ic=document.getElementById('ricon');
+  btn.disabled=true; ic.outerHTML='<span class="spin" id="ricon"></span>';
+  document.getElementById('error').innerHTML='';
+  try{
+    const r=await fetch('api/applications',{cache:'no-store'});
+    const j=await r.json();
+    if(!j.ok) throw new Error(j.error||'API error');
+    DATA=j.rows; render();
+    document.getElementById('meta').textContent = j.count+' candidatures';
+    document.getElementById('foot').textContent = 'Source : PostgreSQL/OCI (db-cv) · maj '+new Date(j.updated).toLocaleString('fr-FR');
+  }catch(e){
+    document.getElementById('error').innerHTML='<div class="err">Erreur de chargement : '+esc(e.message)+'</div>';
+  }finally{
+    const b=document.getElementById('refresh'); b.disabled=false;
+    document.getElementById('ricon')?.replaceWith(Object.assign(document.createElement('span'),{id:'ricon',textContent:'⟳'}));
+  }
+}
+document.querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{
+  const k=th.dataset.k; if(k==='rank')return;
+  if(sortK===k) sortDir*=-1; else { sortK=k; sortDir = (k==='ats')?-1:1; }
+  render();
+});
+load();
+</script>
+</body>
+</html>
