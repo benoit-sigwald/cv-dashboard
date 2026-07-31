@@ -17,6 +17,15 @@
   button:hover { background:#eef3f9; }
   button:disabled { opacity:.6; cursor:default; }
   .wrap { padding:18px 22px 40px; }
+  .iv-wrap { background:#e1f5ee; border:1px solid #9fe1cb; border-radius:12px; padding:14px 16px; margin-bottom:18px; }
+  .iv-wrap h2 { margin:0 0 10px; font-size:15px; color:#0f6e56; }
+  .iv-cards { display:flex; gap:12px; flex-wrap:wrap; }
+  .iv-card { background:#fff; border-radius:10px; padding:12px 14px; flex:1; min-width:250px; box-shadow:0 1px 2px rgba(0,0,0,.06); border-left:4px solid #1D9E75; }
+  .iv-card .c { font-weight:700; color:#0f2c4d; font-size:15px; }
+  .iv-card .r { font-size:12.5px; color:var(--gray); margin:2px 0 7px; }
+  .iv-card .w { font-size:13px; }
+  .iv-card .a { font-size:13px; margin-top:6px; color:#334155; }
+  .iv-card a.btn2 { display:inline-block; margin-top:9px; background:#0f6e56; color:#fff; text-decoration:none; padding:6px 13px; border-radius:6px; font-size:13px; font-weight:600; }
   .kpis { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
   .kpi { background:#fff; border-radius:10px; padding:10px 16px; box-shadow:0 1px 2px rgba(0,0,0,.05); min-width:96px; }
   .kpi .n { font-size:22px; font-weight:700; }
@@ -47,6 +56,7 @@
   <button id="refresh" onclick="load()"><span id="ricon">⟳</span> Refresh</button>
 </header>
 <div class="wrap">
+  <div id="interviews"></div>
   <div class="kpis" id="kpis"></div>
   <div id="error"></div>
   <table id="tbl">
@@ -67,6 +77,11 @@
 </div>
 <script>
 const STATUS = { interview:['Entretien','b-interview'], rejected:['Rejeté','b-rejected'], sent:['Envoyé','b-sent'], draft:['Brouillon','b-draft'] };
+const ACTIONS = {
+  'Accenture': { role:'Senior Manager', when:'Mar. 4 août, 14h00 CEST', todo:'Screen virtuel 30 min (Magdalena Gurau, MS Teams). Fiche prep prête. ⚠️ Caméra ON, pas d’IA pendant l’entretien.' },
+  'WA.Technology': { when:'À BOOKER', todo:'Réserver le créneau — entretien RH 45-60 min (Zsofia Antal + Manon Felix).', link:'https://you.ashbyhq.com/meeting/79b0ab11-1afa-4834-b557-c3909094fd72/' },
+  'Church': { when:'En cours', todo:'TJM 820 € soumis à BNP Paribas Fortis — attendre le retour de Lydia ; relancer si silence >1 semaine.' }
+};
 let DATA = [], sortK='ats', sortDir=-1;
 
 function remu(sb){
@@ -106,6 +121,23 @@ function render(){
     kpi(DATA.length,'Total') + kpi(c('interview'),'Entretiens') + kpi(c('rejected'),'Rejets') + kpi(c('sent'),'En attente');
 }
 function kpi(n,l){ return '<div class="kpi"><div class="n">'+n+'</div><div class="l">'+l+'</div></div>'; }
+function shortName(c){ return String(c||'').split(' (')[0]; }
+function renderInterviews(){
+  const el=document.getElementById('interviews');
+  const ivs=DATA.filter(r=>r.status==='interview');
+  if(!ivs.length){ el.innerHTML=''; return; }
+  el.innerHTML='<div class="iv-wrap"><h2>🟢 Entretiens en cours &amp; actions à prendre</h2><div class="iv-cards">'+
+    ivs.map(r=>{
+      const key=Object.keys(ACTIONS).find(k=>String(r.company).includes(k) && (!ACTIONS[k].role || String(r.role||'').includes(ACTIONS[k].role)));
+      const a=key?ACTIONS[key]:{when:'À planifier',todo:'Préparer / relancer.'};
+      return '<div class="iv-card"><div class="c">'+esc(shortName(r.company))+'</div>'+
+        '<div class="r">'+esc(r.role||'')+'</div>'+
+        '<div class="w">📅 <b>'+esc(a.when)+'</b></div>'+
+        '<div class="a">▸ '+esc(a.todo)+'</div>'+
+        (a.link?'<a class="btn2" href="'+a.link+'" target="_blank" rel="noopener">Réserver le créneau ↗</a>':'')+
+        '</div>';
+    }).join('')+'</div></div>';
+}
 
 async function load(){
   const btn=document.getElementById('refresh'), ic=document.getElementById('ricon');
@@ -116,7 +148,7 @@ async function load(){
     const r=await fetch(bp+'api/applications',{cache:'no-store'});
     const j=await r.json();
     if(!j.ok) throw new Error(j.error||'API error');
-    DATA=j.rows; render();
+    DATA=j.rows; renderInterviews(); render();
     document.getElementById('meta').textContent = j.count+' candidatures';
     document.getElementById('foot').textContent = 'Source : PostgreSQL/OCI (db-cv) · maj '+new Date(j.updated).toLocaleString('fr-FR');
   }catch(e){
