@@ -53,12 +53,12 @@
     <thead>
       <tr>
         <th data-k="rank">#</th>
-        <th data-k="remu">Rému cible</th>
         <th data-k="company">Entreprise</th>
         <th data-k="role">Poste</th>
         <th data-k="location">Lieu</th>
         <th data-k="ats">ATS</th>
         <th data-k="status">Statut</th>
+        <th data-k="remu">Rému cible</th>
       </tr>
     </thead>
     <tbody id="rows"><tr><td colspan="7" style="padding:24px;color:#6b7280">Chargement…</td></tr></tbody>
@@ -94,12 +94,12 @@ function render(){
   });
   document.getElementById('rows').innerHTML = rows.map((r,i)=>
     '<tr><td class="rank">'+(i+1)+'</td>'+
-    '<td class="remu">'+esc(remu(r.salary_benchmark))+'</td>'+
     '<td><b>'+esc(r.company)+'</b></td>'+
     '<td>'+esc(r.role)+'</td>'+
     '<td>'+esc(r.location||'—')+'</td>'+
     '<td class="ats">'+(r.ats_score_after?('<b>'+r.ats_score_after+'</b>'):'—')+'</td>'+
-    '<td>'+badge(r.status)+'</td></tr>'
+    '<td>'+badge(r.status)+'</td>'+
+    '<td class="remu">'+esc(remu(r.salary_benchmark))+'</td></tr>'
   ).join('');
   const c=(s)=>DATA.filter(r=>r.status===s).length;
   document.getElementById('kpis').innerHTML =
