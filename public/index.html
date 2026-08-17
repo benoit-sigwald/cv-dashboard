@@ -38,6 +38,7 @@
   td.rank { color:var(--gray); width:34px; }
   td.ats b { display:inline-block; min-width:30px; text-align:center; background:#eef2f7; color:var(--blue); border-radius:5px; padding:1px 6px; }
   .badge { display:inline-block; padding:2px 9px; border-radius:20px; font-size:12px; font-weight:600; white-space:nowrap; }
+  .b-offer { background:#eaf3de; color:#3b6d11; }
   .b-interview { background:#e1f5ee; color:#0f6e56; }
   .b-rejected { background:#fceaea; color:#a32d2d; }
   .b-sent { background:#eef1f5; color:#5f6b7a; }
@@ -76,10 +77,10 @@
   <div class="foot" id="foot"></div>
 </div>
 <script>
-const STATUS = { interview:['Entretien','b-interview'], rejected:['Rejeté','b-rejected'], sent:['Envoyé','b-sent'], draft:['Brouillon','b-draft'] };
+const STATUS = { offer:['🏆 Accord','b-offer'], interview:['Entretien','b-interview'], rejected:['Rejeté','b-rejected'], sent:['Envoyé','b-sent'], draft:['Brouillon','b-draft'] };
 const ACTIONS = {
   'LTM': { when:'Call fait 13/08 — Right to Represent signé', todo:'Screening Sai (Blue Ocean) passé, mandat exclusif signé. Rému mini déclarée 140-150 k€ base. Prochaine étape : Sai soumet le profil au client LTM = LTIMindtree → entretien client. Rien à faire, attendre le retour.' },
-  '3Point': { when:'Négo salaire en cours', todo:'AI Strategy Consultant (Mike, CTO). Intro + JD OK, CV+lettre tailored (business+technical). Offre verbale £125k + 10 % → contre-offre envoyée : £150k base + 20 % bonus + car allowance (justif worldwide + FR/EN/NL). Attente retour.' },
+  '3Point': { when:'🏆 ACCORD 13/08 — contractor puis salariat', todo:'Accord avec Mike Connaughton (CTO) : démarrage en contractor, puis salariat £150k base + 20 % bonus (package £180k ≈ 212 k€). À sécuriser avant signature : durée de la phase contractor + date de bascule écrites ; TJM 900-1000 £/j (plancher 850, neutre vs leur coût employeur 208-216 k£) ; IR35 et lieu d’exécution à faire valider ; facture HT hors champ TVA FR (art. 259-1 CGI) + n° TVA UK ; frais UK au réel ou per diem ; titre, commission, equity.' },
   'Accenture': { role:'Senior Manager', when:'Screen réalisé (4 août)', todo:'Screen RH passé (Magdalena Gurau). En attente du retour / prochain round. Relancer si silence >1 semaine.' },
   'WA.Technology': { when:'Entretien réalisé — décision ≈14-15/08', todo:'Entretien RH passé (Zsofia + Manon), retour positif, suivi envoyé (site + GitHub). MAJ 07/08 : 1er tour encore en cours (entretiens la semaine prochaine) → décision au plus tard fin de semaine du 11-15/08.' },
   'Infotel': { when:'À CALER', todo:'Infotel Monaco (Sandrine Tixier) demande un 1er échange téléphonique (parcours + attentes). Répondre pour fixer un créneau. ⭐ Local.' },
@@ -127,9 +128,10 @@ function kpi(n,l){ return '<div class="kpi"><div class="n">'+n+'</div><div class
 function shortName(c){ return String(c||'').split(' (')[0]; }
 function renderInterviews(){
   const el=document.getElementById('interviews');
-  const ivs=DATA.filter(r=>r.status==='interview');
+  const ivs=DATA.filter(r=>r.status==='interview'||r.status==='offer')
+                .sort((a,b)=>(a.status==='offer'?-1:0)-(b.status==='offer'?-1:0));
   if(!ivs.length){ el.innerHTML=''; return; }
-  el.innerHTML='<div class="iv-wrap"><h2>🟢 Entretiens en cours &amp; actions à prendre</h2><div class="iv-cards">'+
+  el.innerHTML='<div class="iv-wrap"><h2>🟢 En cours &amp; actions à prendre</h2><div class="iv-cards">'+
     ivs.map(r=>{
       const key=Object.keys(ACTIONS).find(k=>String(r.company).includes(k) && (!ACTIONS[k].role || String(r.role||'').includes(ACTIONS[k].role)));
       const a=key?ACTIONS[key]:{when:'À planifier',todo:'Préparer / relancer.'};
