@@ -7,13 +7,13 @@ The **service key stays server-side** (env var). The browser only calls `/api/ap
 ## Env (set in Coolify)
 | Var | Value |
 |---|---|
-| `SUPABASE_URL` | `https://arx-mcp.duckdns.org/db-cv` |
-| `SUPABASE_SERVICE_ROLE_KEY` | the `cv_writer` / read token |
+| `CV_DB_URL` | `https://arx-mcp.duckdns.org/db-cv` |
+| `CV_DB_KEY` | the `cv_writer` / read token |
 | `PORT` | `3000` (Coolify default) |
 
 ## Run locally
 ```bash
-SUPABASE_URL=https://arx-mcp.duckdns.org/db-cv SUPABASE_SERVICE_ROLE_KEY=<key> node server.js
+CV_DB_URL=https://arx-mcp.duckdns.org/db-cv CV_DB_KEY=<key> node server.js
 # http://localhost:3000
 ```
 
@@ -21,7 +21,7 @@ SUPABASE_URL=https://arx-mcp.duckdns.org/db-cv SUPABASE_SERVICE_ROLE_KEY=<key> n
 Runtime: nixpacks (Node), start `node server.js`, port 3000. Prefix-aware via `<base href="./">` + relative `api/applications`.
 
 1. `POST /api/v1/applications/public` — project/server uuid, `git_repository=https://github.com/benoit-sigwald/cv-dashboard`, `git_branch=main`, `build_pack=nixpacks`, `ports_exposes=3000`, `domains=https://arx-sites.duckdns.org/candidatures`.
-2. `POST /api/v1/applications/{uuid}/envs` — `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`.
+2. `POST /api/v1/applications/{uuid}/envs` — `CV_DB_URL`, `CV_DB_KEY`.
 3. `POST /api/v1/deploy?uuid={uuid}` then poll.
 4. Add a GitHub push-to-deploy webhook (see OCI Migration/REFERENCE.md).
 

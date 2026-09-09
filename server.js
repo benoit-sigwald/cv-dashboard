@@ -5,8 +5,11 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = process.env.PORT || 3000;
-const BASE = (process.env.SUPABASE_URL || 'https://arx-mcp.duckdns.org/db-cv').replace(/\/$/, '');
-const KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+// CV_DB_* are the accurate names: this is PostgREST on the OCI host, not Supabase.
+// The SUPABASE_* names stay as a fallback so a redeploy does not break before the
+// Coolify variables are renamed.
+const BASE = (process.env.CV_DB_URL || process.env.SUPABASE_URL || 'https://arx-mcp.duckdns.org/db-cv').replace(/\/$/, '');
+const KEY = process.env.CV_DB_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
 const INDEX = fs.readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf8');
 
@@ -35,6 +38,14 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain' });
     res.end('ok');
     return;
+  }
+  if (url.endsWith('/favicon.ico') || url.endsWith('/favicon.png')) {
+    const file = path.join(__dirname, 'public', path.basename(url));
+    if (fs.existsSync(file)) {
+      res.writeHead(200, { 'Content-Type': url.endsWith('.ico') ? 'image/x-icon' : 'image/png', 'Cache-Control': 'public, max-age=86400' });
+      res.end(fs.readFileSync(file));
+      return;
+    }
   }
   res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
   res.end(INDEX);
