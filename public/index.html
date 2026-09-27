@@ -3,138 +3,90 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Candidatures & Pipeline Exécutif &mdash; Benoît SIGWALD | Arx Consulting</title>
+  <title>Candidatures &mdash; Pipeline Exécutif | Arx Consulting</title>
   <link rel="icon" type="image/png" href="assets/favicon.png">
   <link rel="shortcut icon" href="favicon.ico">
   <base href="./">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700&family=SF+Pro+Text:wght@400;500;600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #090a10;
-      --bg-surface: #12141d;
-      --bg-card: rgba(22, 26, 38, 0.75);
-      --bg-card-hover: rgba(28, 33, 48, 0.85);
-      --bg-glass: rgba(14, 17, 26, 0.82);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-focus: #0071e3;
+      --apple-bg: #f5f5f7;
+      --apple-card: #ffffff;
+      --apple-card-hover: #fafafa;
+      --apple-nav: rgba(255, 255, 255, 0.82);
+      --apple-drawer: #ffffff;
 
-      --primary: #0071e3;
-      --primary-hover: #0077ed;
-      --primary-glow: rgba(0, 113, 227, 0.28);
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-tertiary: #86868b;
 
-      --emerald: #10b981;
-      --emerald-glow: rgba(16, 185, 129, 0.22);
-      --amber: #f59e0b;
-      --amber-glow: rgba(245, 158, 11, 0.22);
-      --purple: #8b5cf6;
-      --purple-glow: rgba(139, 92, 246, 0.22);
-      --red: #ef4444;
+      --apple-blue: #0071e3;
+      --apple-blue-hover: #0077ed;
+      --apple-blue-subtle: rgba(0, 113, 227, 0.08);
 
-      --text-main: #f5f5f7;
-      --text-muted: #86868b;
-      --text-dim: #636366;
+      --apple-green: #34c759;
+      --apple-green-subtle: rgba(52, 199, 89, 0.12);
+      --apple-green-text: #15803d;
+
+      --apple-orange: #ff9500;
+      --apple-orange-subtle: rgba(255, 149, 0, 0.12);
+      --apple-orange-text: #b45309;
+
+      --apple-red: #ff3b30;
+      --apple-red-subtle: rgba(255, 59, 48, 0.10);
+      --apple-red-text: #dc2626;
+
+      --apple-purple: #5856d6;
+      --apple-purple-subtle: rgba(88, 86, 214, 0.12);
+      --apple-purple-text: #4f46e5;
+
+      --apple-gray-subtle: rgba(142, 142, 147, 0.12);
+      --apple-gray-text: #4b5563;
+
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-hairline: rgba(0, 0, 0, 0.05);
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+      --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      --shadow-elevated: 0 12px 32px rgba(0, 0, 0, 0.08);
 
       --radius-xl: 18px;
       --radius-lg: 14px;
       --radius-md: 10px;
       --radius-sm: 6px;
-      --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.35);
-      --shadow-elevated: 0 16px 40px rgba(0, 0, 0, 0.5);
+      --radius-pill: 9999px;
+
       --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    [data-theme="light"] {
-      --bg: #f5f5f7;
-      --bg-surface: #ffffff;
-      --bg-card: #ffffff;
-      --bg-card-hover: #f8fafc;
-      --bg-glass: rgba(255, 255, 255, 0.88);
-      --border-subtle: rgba(0, 0, 0, 0.08);
-      --border-focus: #0071e3;
-      --text-main: #1d1d1f;
-      --text-muted: #6e6e73;
-      --text-dim: #86868b;
-      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.04);
-      --shadow-elevated: 0 12px 32px rgba(0, 0, 0, 0.08);
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
-
-    [data-theme="light"] body {
-      background: radial-gradient(circle at 50% 0%, #e8edf5 0%, var(--bg) 65%);
-    }
-
-    [data-theme="light"] .section-priority {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(0, 113, 227, 0.03) 100%);
-      border: 1px solid rgba(16, 185, 129, 0.28);
-    }
-    [data-theme="light"] .priority-title { color: #059669; }
-    [data-theme="light"] .deal-card {
-      background: #ffffff;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
-    }
-    [data-theme="light"] .deal-when { color: #059669; }
-    [data-theme="light"] .deal-todo {
-      background: #f8fafc;
-      color: #4b5563;
-    }
-
-    [data-theme="light"] .search-input {
-      background: #ffffff;
-    }
-    [data-theme="light"] .select-sort,
-    [data-theme="light"] .segmented-control,
-    [data-theme="light"] .chip-btn {
-      background: #ffffff;
-    }
-    [data-theme="light"] .chip-btn:hover {
-      border-color: rgba(0, 0, 0, 0.18);
-    }
-
-    [data-theme="light"] .table-container {
-      background: #ffffff;
-    }
-    [data-theme="light"] th {
-      background: #f8fafc;
-    }
-    [data-theme="light"] tr.app-row:hover {
-      background: #f1f5f9;
-    }
-    [data-theme="light"] .col-remu {
-      color: #2563eb;
-    }
-
-    [data-theme="light"] .app-card {
-      background: #ffffff;
-    }
-    [data-theme="light"] .drawer-panel {
-      background: #ffffff;
-    }
-    [data-theme="light"] .drawer-box {
-      background: #f8fafc;
-      border-color: rgba(0, 0, 0, 0.06);
-    }
-
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif; }
 
     body {
-      background: radial-gradient(circle at 50% 0%, #151928 0%, var(--bg) 65%);
-      color: var(--text-main);
+      background-color: var(--apple-bg);
+      color: var(--text-primary);
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow-x: hidden;
-      transition: background 0.3s ease;
+      line-height: 1.47;
+      letter-spacing: -0.01em;
     }
 
-    /* ---- Navigation Top Bar ---- */
+    /* ---- Apple Frosted Glass Navigation Bar ---- */
     header.apple-nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--bg-glass);
+      background: var(--apple-nav);
       backdrop-filter: saturate(180%) blur(20px);
       -webkit-backdrop-filter: saturate(180%) blur(20px);
       border-bottom: 1px solid var(--border-subtle);
@@ -142,19 +94,18 @@
     }
 
     .nav-container {
-      max-width: 1400px;
+      max-width: 1360px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
+      gap: 1.25rem;
     }
 
     .nav-left {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
+      gap: 1.5rem;
       flex-wrap: wrap;
     }
 
@@ -167,14 +118,14 @@
     }
 
     .brand-logo-badge {
-      width: 38px;
-      height: 38px;
-      background: var(--primary);
+      width: 36px;
+      height: 36px;
+      background: var(--apple-blue);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 14px var(--primary-glow);
+      box-shadow: 0 2px 8px rgba(0, 113, 227, 0.3);
     }
 
     .brand-logo-badge img {
@@ -184,50 +135,47 @@
     }
 
     .brand-titles h1 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
       line-height: 1.2;
     }
 
     .brand-titles p {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      letter-spacing: -0.01em;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-weight: 400;
     }
 
-    .nav-btn {
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-link-btn {
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
       padding: 0.4rem 0.85rem;
-      border-radius: var(--radius-md);
-      font-size: 0.84rem;
-      font-weight: 600;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 500;
       text-decoration: none;
+      color: var(--text-primary);
+      background: rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-subtle);
       transition: var(--transition);
-      border: 1px solid transparent;
-      cursor: pointer;
+    }
+    .nav-link-btn:hover {
+      background: rgba(0, 0, 0, 0.08);
+      color: var(--apple-blue);
     }
 
-    .nav-btn-contacts {
-      background: rgba(0, 113, 227, 0.14);
-      color: #58a6ff;
-      border-color: rgba(0, 113, 227, 0.32);
-    }
-    .nav-btn-contacts:hover {
-      background: rgba(0, 113, 227, 0.25);
-      transform: translateY(-1px);
-    }
-
-    .nav-btn-monitor {
-      background: rgba(16, 185, 129, 0.14);
-      color: #34d399;
-      border-color: rgba(16, 185, 129, 0.32);
-    }
-    .nav-btn-monitor:hover {
-      background: rgba(16, 185, 129, 0.25);
-      transform: translateY(-1px);
+    .nav-link-btn.active {
+      background: var(--apple-blue-subtle);
+      color: var(--apple-blue);
+      border-color: rgba(0, 113, 227, 0.25);
     }
 
     .nav-right {
@@ -237,121 +185,89 @@
     }
 
     .btn-refresh {
-      background: var(--primary);
-      color: #fff;
+      background: var(--apple-blue);
+      color: #ffffff;
       border: none;
-      padding: 0.45rem 0.95rem;
-      border-radius: var(--radius-md);
-      font-size: 0.84rem;
+      padding: 0.42rem 0.95rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 0.45rem;
-      box-shadow: 0 4px 12px var(--primary-glow);
       transition: var(--transition);
+      box-shadow: 0 1px 3px rgba(0, 113, 227, 0.25);
     }
     .btn-refresh:hover {
-      background: var(--primary-hover);
-      transform: translateY(-1px);
+      background: var(--apple-blue-hover);
     }
     .btn-refresh:disabled {
       opacity: 0.6;
       cursor: default;
     }
 
-    .theme-toggle-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: var(--radius-md);
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .theme-toggle-btn:hover {
-      border-color: var(--primary);
-    }
-
-    /* ---- Main Content Layout ---- */
+    /* ---- Main Container ---- */
     main.main-content {
-      max-width: 1400px;
+      max-width: 1360px;
       width: 100%;
       margin: 0 auto;
       padding: 1.5rem 1.5rem 4rem;
       display: flex;
       flex-direction: column;
-      gap: 1.75rem;
+      gap: 1.5rem;
     }
 
-    /* ---- KPIs Grid ---- */
-    .kpis-grid {
+    /* ---- KPI Cards (Apple Numbers style) ---- */
+    .kpi-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
       gap: 1rem;
     }
 
     .kpi-card {
-      background: var(--bg-card);
+      background: var(--apple-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
-      padding: 1.15rem 1.25rem;
+      padding: 1.15rem 1.35rem;
       box-shadow: var(--shadow-card);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      gap: 0.25rem;
       transition: var(--transition);
-      position: relative;
-      overflow: hidden;
     }
     .kpi-card:hover {
-      border-color: rgba(255, 255, 255, 0.16);
-      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
     }
-
-    .kpi-card::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: transparent;
-    }
-    .kpi-card.blue::before { background: var(--primary); }
-    .kpi-card.emerald::before { background: var(--emerald); }
-    .kpi-card.purple::before { background: var(--purple); }
-    .kpi-card.amber::before { background: var(--amber); }
 
     .kpi-label {
-      font-size: 0.78rem;
-      color: var(--text-muted);
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.06em;
+      color: var(--text-secondary);
       font-weight: 600;
     }
 
-    .kpi-val {
+    .kpi-value {
       font-size: 1.85rem;
-      font-weight: 800;
+      font-weight: 700;
       letter-spacing: -0.03em;
-      line-height: 1.1;
+      line-height: 1.15;
+      color: var(--text-primary);
     }
 
-    .kpi-sub {
+    .kpi-desc {
       font-size: 0.78rem;
-      color: var(--text-dim);
+      color: var(--text-tertiary);
     }
 
-    /* ---- Priority Deals Section ---- */
-    .section-priority {
-      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(0, 113, 227, 0.04) 100%);
-      border: 1px solid rgba(16, 185, 129, 0.25);
+    /* ---- Priority Section ---- */
+    .priority-section {
+      background: var(--apple-card);
+      border: 1px solid var(--border-subtle);
       border-radius: var(--radius-xl);
       padding: 1.35rem 1.5rem;
+      box-shadow: var(--shadow-card);
     }
 
     .priority-header {
@@ -359,94 +275,90 @@
       align-items: center;
       justify-content: space-between;
       margin-bottom: 1rem;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-hairline);
     }
 
     .priority-title {
-      font-size: 1.05rem;
-      font-weight: 700;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      color: #34d399;
     }
 
-    .priority-cards {
+    .priority-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 1rem;
     }
 
-    .deal-card {
-      background: var(--bg-card);
+    .priority-card {
+      background: var(--apple-bg);
       border: 1px solid var(--border-subtle);
-      border-left: 4px solid var(--emerald);
-      border-radius: var(--radius-lg);
+      border-radius: var(--radius-md);
       padding: 1.1rem 1.25rem;
-      box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
       gap: 0.55rem;
       transition: var(--transition);
       cursor: pointer;
     }
-    .deal-card:hover {
-      border-color: rgba(16, 185, 129, 0.4);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px var(--emerald-glow);
+    .priority-card:hover {
+      background: #ffffff;
+      border-color: rgba(0, 0, 0, 0.15);
+      box-shadow: var(--shadow-sm);
     }
 
-    .deal-top {
+    .priority-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 0.5rem;
     }
 
-    .deal-company {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-main);
-    }
-
-    .deal-role {
-      font-size: 0.86rem;
-      color: var(--text-muted);
-      font-weight: 500;
-    }
-
-    .deal-when {
-      font-size: 0.82rem;
+    .priority-company {
+      font-size: 1.05rem;
       font-weight: 600;
-      color: #34d399;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
+      color: var(--text-primary);
     }
 
-    .deal-todo {
-      font-size: 0.82rem;
-      color: var(--text-muted);
+    .priority-role {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .priority-when {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--apple-blue);
+    }
+
+    .priority-todo {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
       line-height: 1.45;
-      background: rgba(255, 255, 255, 0.03);
-      padding: 0.55rem 0.75rem;
+      background: #ffffff;
+      padding: 0.5rem 0.75rem;
       border-radius: var(--radius-sm);
+      border: 1px solid var(--border-hairline);
     }
 
-    /* ---- Controls Bar ---- */
-    .controls-bar {
-      background: var(--bg-card);
+    /* ---- Controls Toolbar ---- */
+    .controls-panel {
+      background: var(--apple-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-xl);
       padding: 1rem 1.25rem;
+      box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
       gap: 0.85rem;
-      box-shadow: var(--shadow-card);
     }
 
-    .controls-top {
+    .controls-top-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -454,7 +366,7 @@
       flex-wrap: wrap;
     }
 
-    .search-box {
+    .search-wrap {
       flex: 1;
       min-width: 260px;
       position: relative;
@@ -462,133 +374,139 @@
 
     .search-input {
       width: 100%;
-      background: var(--bg-surface);
+      background: var(--apple-bg);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      padding: 0.65rem 1rem 0.65rem 2.5rem;
-      font-size: 0.9rem;
-      color: var(--text-main);
+      padding: 0.55rem 0.95rem 0.55rem 2.25rem;
+      font-size: 0.88rem;
+      color: var(--text-primary);
       outline: none;
       transition: var(--transition);
     }
     .search-input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px var(--primary-glow);
+      background: #ffffff;
+      border-color: var(--apple-blue);
+      box-shadow: 0 0 0 3px var(--apple-blue-subtle);
     }
 
-    .search-icon {
+    .search-svg {
       position: absolute;
-      left: 0.85rem;
+      left: 0.75rem;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--text-dim);
+      color: var(--text-tertiary);
       pointer-events: none;
     }
 
-    .controls-actions {
+    .controls-right-group {
       display: flex;
       align-items: center;
       gap: 0.65rem;
-      flex-wrap: wrap;
     }
 
-    .select-sort {
-      background: var(--bg-surface);
+    .sort-select {
+      background: var(--apple-bg);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-md);
-      color: var(--text-main);
-      padding: 0.6rem 0.85rem;
-      font-size: 0.84rem;
+      color: var(--text-primary);
+      padding: 0.5rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 500;
       outline: none;
       cursor: pointer;
     }
 
-    .segmented-control {
+    /* Segmented Control (Apple style) */
+    .segmented-picker {
       display: inline-flex;
-      background: var(--bg-surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      padding: 3px;
+      background: rgba(118, 118, 128, 0.12);
+      border-radius: 8px;
+      padding: 2px;
       gap: 2px;
     }
 
     .segmented-btn {
       background: transparent;
       border: none;
-      color: var(--text-muted);
-      padding: 0.4rem 0.75rem;
+      color: var(--text-secondary);
+      padding: 0.35rem 0.75rem;
       border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 600;
+      font-size: 0.8rem;
+      font-weight: 500;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
       transition: var(--transition);
     }
     .segmented-btn.active {
-      background: var(--primary);
-      color: #fff;
-      box-shadow: 0 2px 8px var(--primary-glow);
+      background: #ffffff;
+      color: var(--text-primary);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      font-weight: 600;
     }
 
-    .filter-chips {
+    /* Filter Chips */
+    .chips-row {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.45rem;
       flex-wrap: wrap;
     }
 
-    .chip-btn {
-      background: var(--bg-surface);
+    .filter-chip {
+      background: var(--apple-bg);
       border: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      border-radius: 20px;
-      padding: 0.35rem 0.85rem;
-      font-size: 0.8rem;
-      font-weight: 600;
+      color: var(--text-secondary);
+      border-radius: var(--radius-pill);
+      padding: 0.3rem 0.85rem;
+      font-size: 0.78rem;
+      font-weight: 500;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
       transition: var(--transition);
     }
-    .chip-btn:hover {
-      border-color: rgba(255, 255, 255, 0.2);
-      color: var(--text-main);
+    .filter-chip:hover {
+      border-color: rgba(0, 0, 0, 0.2);
+      color: var(--text-primary);
     }
-    .chip-btn.active {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-      box-shadow: 0 2px 10px var(--primary-glow);
+    .filter-chip.active {
+      background: var(--text-primary);
+      color: #ffffff;
+      border-color: var(--text-primary);
     }
+
     .chip-count {
-      opacity: 0.8;
-      font-size: 0.74rem;
+      opacity: 0.75;
+      font-size: 0.72rem;
     }
 
     /* ---- Table View ---- */
-    .table-container {
-      background: var(--bg-card);
+    .table-card {
+      background: var(--apple-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-xl);
       overflow-x: auto;
       box-shadow: var(--shadow-card);
     }
 
-    table.app-table {
+    table.apple-table {
       width: 100%;
       border-collapse: collapse;
-      font-size: 0.88rem;
+      font-size: 0.86rem;
       text-align: left;
     }
 
     th {
-      background: var(--bg-surface);
-      color: var(--text-muted);
+      background: #fafafa;
+      color: var(--text-tertiary);
+      font-size: 0.7rem;
       font-weight: 600;
-      padding: 0.85rem 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.75rem 1rem;
       border-bottom: 1px solid var(--border-subtle);
       position: sticky;
       top: 0;
@@ -596,71 +514,72 @@
       cursor: pointer;
       user-select: none;
     }
-    th:hover { color: var(--text-main); }
+    th:hover {
+      color: var(--text-primary);
+    }
 
     td {
-      padding: 0.9rem 1rem;
-      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-hairline);
       vertical-align: middle;
     }
 
     tr.app-row {
-      transition: var(--transition);
+      transition: background 0.15s ease;
       cursor: pointer;
     }
     tr.app-row:hover {
-      background: var(--bg-card-hover);
+      background: #f8fafc;
     }
 
-    .col-rank { color: var(--text-dim); font-size: 0.8rem; width: 40px; }
-    .col-company { font-weight: 700; color: var(--text-main); font-size: 0.95rem; }
-    .col-role { color: var(--text-main); font-weight: 500; }
-    .col-loc { color: var(--text-muted); font-size: 0.82rem; }
-    .col-remu { font-weight: 600; color: #60a5fa; white-space: nowrap; font-family: "JetBrains Mono", monospace; font-size: 0.84rem; }
+    .col-rank { color: var(--text-tertiary); font-size: 0.78rem; width: 36px; }
+    .col-company { font-weight: 600; color: var(--text-primary); }
+    .col-role { color: var(--text-secondary); font-weight: 400; }
+    .col-loc { color: var(--text-tertiary); font-size: 0.8rem; }
+    .col-remu { font-weight: 600; color: var(--apple-blue); white-space: nowrap; font-family: "JetBrains Mono", monospace; font-size: 0.82rem; }
 
-    /* ---- Status Badges ---- */
+    /* ---- Status Badges (Minimalist Apple Pills) ---- */
     .badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      padding: 0.28rem 0.65rem;
-      border-radius: 20px;
-      font-size: 0.76rem;
-      font-weight: 700;
-      white-space: nowrap;
+      padding: 0.22rem 0.65rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.74rem;
+      font-weight: 600;
       letter-spacing: -0.01em;
+      white-space: nowrap;
     }
 
-    .badge-offer { background: rgba(16, 185, 129, 0.16); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .badge-interview { background: rgba(0, 113, 227, 0.16); color: #60a5fa; border: 1px solid rgba(0, 113, 227, 0.3); }
-    .badge-sent { background: rgba(139, 92, 246, 0.16); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.3); }
-    .badge-draft { background: rgba(245, 158, 11, 0.16); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
-    .badge-rejected { background: rgba(239, 68, 68, 0.14); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.25); }
+    .badge-offer { background: var(--apple-green-subtle); color: var(--apple-green-text); }
+    .badge-interview { background: var(--apple-blue-subtle); color: var(--apple-blue); }
+    .badge-sent { background: var(--apple-purple-subtle); color: var(--apple-purple-text); }
+    .badge-draft { background: var(--apple-orange-subtle); color: var(--apple-orange-text); }
+    .badge-rejected { background: var(--apple-gray-subtle); color: var(--apple-gray-text); }
 
-    /* ---- ATS Gauge Badge ---- */
-    .ats-badge {
+    /* ATS Gauge Pill */
+    .ats-pill {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.22rem 0.55rem;
-      border-radius: 8px;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
       font-family: "JetBrains Mono", monospace;
-      font-weight: 700;
-      font-size: 0.84rem;
+      font-weight: 600;
+      font-size: 0.8rem;
     }
-    .ats-high { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
-    .ats-mid { background: rgba(0, 113, 227, 0.15); color: #60a5fa; border: 1px solid rgba(0, 113, 227, 0.3); }
-    .ats-low { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .ats-high { background: var(--apple-green-subtle); color: var(--apple-green-text); }
+    .ats-mid { background: var(--apple-blue-subtle); color: var(--apple-blue); }
+    .ats-neutral { background: var(--apple-gray-subtle); color: var(--apple-gray-text); }
 
     /* ---- Cards Grid View ---- */
     .cards-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.15rem;
+      gap: 1rem;
     }
 
     .app-card {
-      background: var(--bg-card);
+      background: var(--apple-card);
       border: 1px solid var(--border-subtle);
       border-radius: var(--radius-lg);
       padding: 1.25rem;
@@ -672,9 +591,8 @@
       cursor: pointer;
     }
     .app-card:hover {
-      border-color: rgba(255, 255, 255, 0.18);
-      transform: translateY(-2px);
       box-shadow: var(--shadow-elevated);
+      transform: translateY(-1px);
     }
 
     .card-head {
@@ -685,55 +603,51 @@
     }
 
     .card-comp {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text-main);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text-primary);
     }
 
     .card-role {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      font-weight: 500;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
     }
 
     .card-meta-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.82rem;
-      color: var(--text-dim);
+      font-size: 0.8rem;
+      color: var(--text-tertiary);
       padding-top: 0.5rem;
-      border-top: 1px solid var(--border-subtle);
+      border-top: 1px solid var(--border-hairline);
     }
 
-    /* ---- Slide-Over Drawer ---- */
+    /* ---- Apple Inspector Drawer (Slide-over Sheet) ---- */
     .drawer-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0, 0, 0, 0.65);
-      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(4px);
       z-index: 1000;
       display: none;
       align-items: flex-start;
       justify-content: flex-end;
     }
-    .drawer-overlay.active {
-      display: flex;
-    }
+    .drawer-overlay.active { display: flex; }
 
     .drawer-panel {
-      background: var(--bg-surface);
-      border-left: 1px solid var(--border-subtle);
+      background: var(--apple-drawer);
       width: 100%;
-      max-width: 600px;
+      max-width: 580px;
       height: 100vh;
       overflow-y: auto;
       padding: 2rem;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
-      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
-      animation: slideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: -8px 0 32px rgba(0, 0, 0, 0.12);
+      animation: slideIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     @keyframes slideIn {
@@ -751,42 +665,45 @@
     }
 
     .drawer-close {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      color: var(--text-main);
-      width: 34px;
-      height: 34px;
+      background: rgba(0, 0, 0, 0.05);
+      border: none;
+      color: var(--text-secondary);
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 1.2rem;
+      transition: var(--transition);
     }
-    .drawer-close:hover { background: rgba(255, 255, 255, 0.1); }
+    .drawer-close:hover {
+      background: rgba(0, 0, 0, 0.1);
+      color: var(--text-primary);
+    }
 
     .drawer-section {
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
 
     .drawer-section-title {
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-muted);
-      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--text-tertiary);
+      font-weight: 600;
     }
 
     .drawer-box {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
+      background: var(--apple-bg);
+      border: 1px solid var(--border-hairline);
       border-radius: var(--radius-md);
-      padding: 0.9rem 1.1rem;
-      font-size: 0.88rem;
+      padding: 0.85rem 1rem;
+      font-size: 0.86rem;
       line-height: 1.5;
-      color: var(--text-main);
+      color: var(--text-primary);
     }
 
     .drawer-grid-2 {
@@ -798,21 +715,21 @@
     /* ---- Footer ---- */
     footer.app-footer {
       text-align: center;
-      color: var(--text-dim);
-      font-size: 0.82rem;
+      color: var(--text-tertiary);
+      font-size: 0.8rem;
       padding: 2rem 1.5rem;
       border-top: 1px solid var(--border-subtle);
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
+      gap: 0.35rem;
       align-items: center;
     }
 
     .spin {
       display: inline-block;
-      width: 14px;
-      height: 14px;
-      border: 2px solid #fff;
+      width: 12px;
+      height: 12px;
+      border: 2px solid currentColor;
       border-top-color: transparent;
       border-radius: 50%;
       animation: spinAnim 0.7s linear infinite;
@@ -822,13 +739,13 @@
     @media (max-width: 768px) {
       .nav-container { flex-direction: column; align-items: flex-start; }
       .drawer-panel { max-width: 100%; }
-      .priority-cards { grid-template-columns: 1fr; }
+      .priority-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation Header -->
+  <!-- Apple Frosted Glass Navigation Bar -->
   <header class="apple-nav">
     <div class="nav-container">
       <div class="nav-left">
@@ -837,152 +754,154 @@
             <img src="assets/arx-logo-blanc.png" alt="Arx Logo" onerror="this.src='favicon.png'">
           </div>
           <div class="brand-titles">
-            <h1>Candidatures &bull; Pipeline Exécutif</h1>
-            <p>Benoît SIGWALD &mdash; Direction Technique & Architecture IA</p>
+            <h1>Candidatures</h1>
+            <p>Benoît Sigwald &mdash; Pipeline Exécutif</p>
           </div>
         </a>
 
-        <!-- Fast Links to Contacts & Monitor -->
-        <a href="/contacts/" class="nav-btn nav-btn-contacts" title="Ouvrir la base Décideurs Région Sud">
-          <span>📇</span> Contacts
-        </a>
+        <!-- Cross Navigation Links (Contacts & Monitor) -->
+        <div class="nav-links">
+          <a href="/contacts/" class="nav-link-btn" title="Répertoire Décideurs Région Sud">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Contacts</span>
+          </a>
 
-        <a href="/contacts/monitor.html" class="nav-btn nav-btn-monitor" title="Supervision continue Scraper">
-          <span>📊</span> Scraper Monitor
-        </a>
+          <a href="/contacts/monitor.html" class="nav-link-btn" title="Supervision Scraper Oracle ATP">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            <span>Scraper Monitor</span>
+          </a>
+        </div>
       </div>
 
       <div class="nav-right">
         <button id="btnRefresh" class="btn-refresh" onclick="loadApplications()">
-          <span id="refreshIcon">⟳</span>
+          <svg id="refreshSvg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
           <span>Actualiser</span>
-          <span id="countBadge" style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 10px; font-size: 0.75rem;">...</span>
-        </button>
-
-        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Basculer Thème Clair / Sombre">
-          <span id="themeIcon">🌙</span>
+          <span id="countBadge" style="background: rgba(255,255,255,0.25); padding: 1px 6px; border-radius: 6px; font-size: 0.72rem;">...</span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Main Dashboard Content -->
+  <!-- Main Content Layout -->
   <main class="main-content">
 
-    <!-- KPI Summary Ribbon -->
-    <div class="kpis-grid">
-      <div class="kpi-card blue">
+    <!-- KPI Summary Grid -->
+    <div class="kpi-row">
+      <div class="kpi-card">
         <span class="kpi-label">Dossiers Totaux</span>
-        <span class="kpi-val" id="kpiTotal">0</span>
-        <span class="kpi-sub" id="kpiTotalSub">PostgREST db-cv synchronisé</span>
+        <span class="kpi-value" id="kpiTotal">0</span>
+        <span class="kpi-desc">Base PostgREST db-cv</span>
       </div>
 
-      <div class="kpi-card emerald">
-        <span class="kpi-label">🏆 Accords & Entretiens</span>
-        <span class="kpi-val" id="kpiInterviews" style="color: #34d399;">0</span>
-        <span class="kpi-sub">Processus qualifiés en cours</span>
+      <div class="kpi-card">
+        <span class="kpi-label">Accords &amp; Entretiens</span>
+        <span class="kpi-value" id="kpiInterviews" style="color: var(--apple-green-text);">0</span>
+        <span class="kpi-desc">Processus qualifiés en cours</span>
       </div>
 
-      <div class="kpi-card purple">
-        <span class="kpi-label">Score ATS Maximum</span>
-        <span class="kpi-val" id="kpiAtsMax" style="color: #c4b5fd;">0%</span>
-        <span class="kpi-sub" id="kpiAtsAvg">Moyenne: --%</span>
+      <div class="kpi-card">
+        <span class="kpi-label">Score ATS Maximal</span>
+        <span class="kpi-value" id="kpiAtsMax" style="color: var(--apple-blue);">0%</span>
+        <span class="kpi-desc" id="kpiAtsAvg">Moyenne : --%</span>
       </div>
 
-      <div class="kpi-card amber">
+      <div class="kpi-card">
         <span class="kpi-label">Benchmark Cible</span>
-        <span class="kpi-val" id="kpiRemu" style="font-size: 1.45rem;">150 - 250 k€</span>
-        <span class="kpi-sub">Ou TJM 900 - 1 200 €/j</span>
+        <span class="kpi-value" id="kpiRemu" style="font-size: 1.45rem;">150 &ndash; 250 k€</span>
+        <span class="kpi-desc">TJM 900 &ndash; 1 200 €/j</span>
       </div>
 
-      <div class="kpi-card blue">
+      <div class="kpi-card">
         <span class="kpi-label">En Attente / Rejetés</span>
-        <span class="kpi-val" id="kpiSentPending">0</span>
-        <span class="kpi-sub" id="kpiSentSub">Pipeline actif</span>
+        <span class="kpi-value" id="kpiSentPending">0</span>
+        <span class="kpi-desc" id="kpiSentSub">Pipeline actif</span>
       </div>
     </div>
 
-    <!-- Active Deals & Next Actions -->
-    <section class="section-priority" id="sectionPriority">
+    <!-- Active Deals Section -->
+    <section class="priority-section" id="sectionPriority">
       <div class="priority-header">
         <h2 class="priority-title">
-          <span>🟢</span> Processus en Cours &amp; Actions Prioritaires
+          Opportunités Clés &amp; Prochaines Échéances
         </h2>
-        <span style="font-size: 0.8rem; color: var(--text-dim);" id="prioritySub">Suivi stratégique des accords</span>
+        <span style="font-size: 0.78rem; color: var(--text-tertiary);" id="prioritySub">Accords et tours de qualification</span>
       </div>
-      <div class="priority-cards" id="priorityContainer">
-        <!-- Rendered by JS -->
+      <div class="priority-grid" id="priorityContainer">
+        <!-- Injected by JS -->
       </div>
     </section>
 
-    <!-- Interactive Filters & Controls Bar -->
-    <div class="controls-bar">
-      <div class="controls-top">
-        <div class="search-box">
-          <span class="search-icon">🔍</span>
+    <!-- Toolbar: Search & Filters -->
+    <div class="controls-panel">
+      <div class="controls-top-row">
+        <div class="search-wrap">
+          <svg class="search-svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
           <input type="text" id="searchInput" class="search-input" placeholder="Rechercher par entreprise, poste, lieu, mots-clés..." oninput="handleSearch()">
         </div>
 
-        <div class="controls-actions">
-          <select id="sortSelect" class="select-sort" onchange="handleSort(this.value)">
-            <option value="ats_desc">Score ATS (Plus élevé)</option>
-            <option value="ats_asc">Score ATS (Plus bas)</option>
+        <div class="controls-right-group">
+          <select id="sortSelect" class="sort-select" onchange="handleSort(this.value)">
+            <option value="ats_desc">Score ATS (décroissant)</option>
+            <option value="ats_asc">Score ATS (croissant)</option>
             <option value="company_asc">Entreprise (A &rarr; Z)</option>
-            <option value="status">Par Statut</option>
+            <option value="status">Statut</option>
             <option value="recent">Plus récents</option>
           </select>
 
-          <div class="segmented-control">
+          <div class="segmented-picker">
             <button class="segmented-btn active" id="btnViewTable" onclick="setViewMode('table')">
-              <span>📋</span> Tableau
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+              Tableau
             </button>
             <button class="segmented-btn" id="btnViewCards" onclick="setViewMode('cards')">
-              <span>🗂️</span> Cartes
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+              Cartes
             </button>
           </div>
         </div>
       </div>
 
       <!-- Filter Chips -->
-      <div class="filter-chips" id="filterChips">
-        <button class="chip-btn active" data-status="all" onclick="filterStatus('all')">
+      <div class="chips-row" id="filterChips">
+        <button class="filter-chip active" data-status="all" onclick="filterStatus('all')">
           Tous <span class="chip-count" id="chipCountAll">(0)</span>
         </button>
-        <button class="chip-btn" data-status="offer" onclick="filterStatus('offer')">
-          🏆 Accords <span class="chip-count" id="chipCountOffer">(0)</span>
+        <button class="filter-chip" data-status="offer" onclick="filterStatus('offer')">
+          Accords <span class="chip-count" id="chipCountOffer">(0)</span>
         </button>
-        <button class="chip-btn" data-status="interview" onclick="filterStatus('interview')">
-          🎙️ Entretiens <span class="chip-count" id="chipCountInterview">(0)</span>
+        <button class="filter-chip" data-status="interview" onclick="filterStatus('interview')">
+          Entretiens <span class="chip-count" id="chipCountInterview">(0)</span>
         </button>
-        <button class="chip-btn" data-status="sent" onclick="filterStatus('sent')">
-          ⏳ En attente <span class="chip-count" id="chipCountSent">(0)</span>
+        <button class="filter-chip" data-status="sent" onclick="filterStatus('sent')">
+          En attente <span class="chip-count" id="chipCountSent">(0)</span>
         </button>
-        <button class="chip-btn" data-status="draft" onclick="filterStatus('draft')">
-          📝 Brouillons <span class="chip-count" id="chipCountDraft">(0)</span>
+        <button class="filter-chip" data-status="draft" onclick="filterStatus('draft')">
+          Brouillons <span class="chip-count" id="chipCountDraft">(0)</span>
         </button>
-        <button class="chip-btn" data-status="rejected" onclick="filterStatus('rejected')">
-          ❌ Rejets <span class="chip-count" id="chipCountRejected">(0)</span>
+        <button class="filter-chip" data-status="rejected" onclick="filterStatus('rejected')">
+          Rejetés <span class="chip-count" id="chipCountRejected">(0)</span>
         </button>
       </div>
     </div>
 
     <!-- Table View -->
-    <div class="table-container" id="tableViewContainer">
-      <table class="app-table">
+    <div class="table-card" id="tableViewContainer">
+      <table class="apple-table">
         <thead>
           <tr>
             <th class="col-rank" onclick="toggleSort('rank')">#</th>
             <th onclick="toggleSort('company')">Entreprise</th>
-            <th onclick="toggleSort('role')">Poste &bull; Mission</th>
-            <th onclick="toggleSort('location')">Localisation</th>
-            <th onclick="toggleSort('ats')">Score ATS</th>
+            <th onclick="toggleSort('role')">Poste</th>
+            <th onclick="toggleSort('location')">Lieu</th>
+            <th onclick="toggleSort('ats')">ATS</th>
             <th onclick="toggleSort('status')">Statut</th>
             <th onclick="toggleSort('remu')">Rémunération Cible</th>
-            <th style="text-align: right;">Action</th>
+            <th style="text-align: right;">Fiche</th>
           </tr>
         </thead>
         <tbody id="tableBody">
-          <tr><td colspan="8" style="padding: 2.5rem; text-align: center; color: var(--text-dim);">Chargement des dossiers depuis la base PostgREST...</td></tr>
+          <tr><td colspan="8" style="padding: 2.5rem; text-align: center; color: var(--text-tertiary);">Chargement des dossiers depuis la base PostgREST...</td></tr>
         </tbody>
       </table>
     </div>
@@ -994,15 +913,17 @@
 
   </main>
 
-  <!-- Slide-Over Drawer for Application Details -->
+  <!-- Slide-Over Inspector Drawer -->
   <div class="drawer-overlay" id="drawerOverlay" onclick="handleBackdropClick(event)">
     <div class="drawer-panel" id="drawerPanel">
       <div class="drawer-header">
         <div>
-          <div id="drawerCompany" style="font-size: 1.4rem; font-weight: 800;">Entreprise</div>
-          <div id="drawerRole" style="font-size: 1rem; color: var(--text-muted); font-weight: 500;">Poste</div>
+          <div id="drawerCompany" style="font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em;">Entreprise</div>
+          <div id="drawerRole" style="font-size: 0.95rem; color: var(--text-secondary); margin-top: 0.15rem;">Poste</div>
         </div>
-        <button class="drawer-close" onclick="closeDrawer()" title="Fermer (Échap)">&times;</button>
+        <button class="drawer-close" onclick="closeDrawer()" title="Fermer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
 
       <!-- Quick Metrics Strip -->
@@ -1010,8 +931,8 @@
         <div class="drawer-box">
           <div class="drawer-section-title">Score ATS</div>
           <div id="drawerAtsWrap" style="margin-top: 0.35rem; display: flex; align-items: baseline; gap: 0.5rem;">
-            <span id="drawerAtsScore" style="font-size: 1.6rem; font-weight: 800; color: #34d399;">--</span>
-            <span id="drawerAtsBefore" style="font-size: 0.85rem; color: var(--text-dim); text-decoration: line-through;"></span>
+            <span id="drawerAtsScore" style="font-size: 1.5rem; font-weight: 700; color: var(--apple-green-text);">--</span>
+            <span id="drawerAtsBefore" style="font-size: 0.82rem; color: var(--text-tertiary); text-decoration: line-through;"></span>
           </div>
         </div>
 
@@ -1021,15 +942,15 @@
         </div>
       </div>
 
-      <!-- Location & Lang -->
+      <!-- Location -->
       <div class="drawer-box">
         <div class="drawer-section-title">Localisation &amp; Modalités</div>
-        <div id="drawerLocation" style="font-weight: 600; margin-top: 0.2rem;">--</div>
+        <div id="drawerLocation" style="font-weight: 500; margin-top: 0.2rem;">--</div>
       </div>
 
       <!-- Compensation / Salary Benchmark -->
       <div class="drawer-section">
-        <div class="drawer-section-title">Benchmark Salarial &amp; Rémunération</div>
+        <div class="drawer-section-title">Benchmark Salarial</div>
         <div class="drawer-box" id="drawerSalary">--</div>
       </div>
 
@@ -1041,19 +962,19 @@
 
       <!-- Company Analysis -->
       <div class="drawer-section" id="drawerCompanySection">
-        <div class="drawer-section-title">Analyse Entreprise &amp; Enjeux</div>
+        <div class="drawer-section-title">Analyse Entreprise</div>
         <div class="drawer-box" id="drawerCompanyAnalysis">--</div>
       </div>
 
       <!-- Hard Gates & Keywords -->
       <div class="drawer-section" id="drawerGatesSection">
-        <div class="drawer-section-title">Hard Gates &amp; Mots-Clés ATS</div>
+        <div class="drawer-section-title">Critères Clés &amp; Mots-Clés</div>
         <div class="drawer-box" id="drawerGates">--</div>
       </div>
 
       <!-- Job Spec Preview -->
       <div class="drawer-section" id="drawerSpecSection">
-        <div class="drawer-section-title">Description du Poste / Spécifications</div>
+        <div class="drawer-section-title">Spécifications du Poste</div>
         <div class="drawer-box" id="drawerJobSpec" style="max-height: 220px; overflow-y: auto; white-space: pre-wrap; font-size: 0.82rem; font-family: monospace;">--</div>
       </div>
     </div>
@@ -1061,27 +982,26 @@
 
   <!-- Footer -->
   <footer class="app-footer">
-    <div>Plateforme Exécutive <strong>Arx Consulting</strong> &bull; Alimentée par PostgreSQL &amp; PostgREST (OCI)</div>
-    <div id="footerMeta" style="font-size: 0.76rem; color: var(--text-dim);">Dernière synchronisation : --</div>
+    <div>Arx Consulting &bull; Pipeline Exécutif</div>
+    <div id="footerMeta">PostgreSQL &bull; Synchronisé</div>
   </footer>
 
   <script>
-    // Known strategic actions for priority opportunities
     const ACTIONS = {
-      'LTM': { when:'Call fait 13/08 — Right to Represent signé', todo:'Screening Sai (Blue Ocean) passé, mandat exclusif signé. Rému mini déclarée 140-150 k€ base. Prochaine étape : Sai soumet le profil au client LTM = LTIMindtree → entretien client.' },
-      '3Point': { when:'🏆 ACCORD 13/08 — contractor puis salariat', todo:'Accord avec Mike Connaughton (CTO) : démarrage en contractor, puis salariat £150k base + 20 % bonus (package £180k ≈ 212 k€). TJM 900-1000 £/j.' },
-      'Accenture': { role:'Senior Manager', when:'Screen réalisé (4 août)', todo:'Screen RH passé (Magdalena Gurau). En attente du retour / prochain round. Relancer si silence >1 semaine.' },
-      'WA.Technology': { when:'Entretien réalisé — décision ≈14-15/08', todo:'Entretien RH passé (Zsofia + Manon), retour positif, suivi envoyé (site + GitHub).' },
-      'Infotel': { when:'À CALER', todo:'Infotel Monaco (Sandrine Tixier) demande un 1er échange téléphonique (parcours + attentes). ⭐ Local.' },
+      'LTM': { when:'Right to Represent signé (13/08)', todo:'Screening passé, mandat exclusif signé. Rému mini 140-150 k€ base. Sai soumet le profil au client LTIMindtree.' },
+      '3Point': { when:'Accord Mike Connaughton (CTO)', todo:'Démarrage contractor puis salariat £150k base + 20 % bonus (package £180k ≈ 212 k€). TJM 900-1000 £/j.' },
+      'Accenture': { role:'Senior Manager', when:'Screen RH passé', todo:'Screen RH passé (Magdalena Gurau). En attente du retour / prochain round.' },
+      'WA.Technology': { when:'Entretien RH réalisé', todo:'Entretien passé (Zsofia + Manon), retour positif, suivi envoyé.' },
+      'Infotel': { when:'À caler', todo:'Infotel Monaco (Sandrine Tixier) demande un 1er échange téléphonique (parcours + attentes).' },
       'Church': { when:'Chez le hiring manager', todo:'Candidature transmise au hiring manager (BNP). Démarrage prévu 15/09.' }
     };
 
     const STATUS_MAP = {
-      offer: { label: '🏆 Accord Obtenu', cls: 'badge-offer' },
-      interview: { label: '🎙️ Entretien', cls: 'badge-interview' },
-      sent: { label: '⏳ En Attente', cls: 'badge-sent' },
-      draft: { label: '📝 Brouillon', cls: 'badge-draft' },
-      rejected: { label: '❌ Rejeté', cls: 'badge-rejected' }
+      offer: { label: 'Accord', cls: 'badge-offer' },
+      interview: { label: 'Entretien', cls: 'badge-interview' },
+      sent: { label: 'Envoyé', cls: 'badge-sent' },
+      draft: { label: 'Brouillon', cls: 'badge-draft' },
+      rejected: { label: 'Rejeté', cls: 'badge-rejected' }
     };
 
     let RAW_DATA = [];
@@ -1099,7 +1019,7 @@
       if (!sb) return '&mdash;';
       if (typeof sb === 'string') return esc(sb);
       const parts = [];
-      if (sb.package_year_eur) parts.push(sb.package_year_eur + ' (pkg)');
+      if (sb.package_year_eur) parts.push(sb.package_year_eur + ' pkg');
       else if (sb.range_year_eur) parts.push(sb.range_year_eur + ' €/an');
       else if (sb.base_year_eur) parts.push(sb.base_year_eur + ' € base');
       else if (sb.market_range_monthly_aed) parts.push(sb.market_range_monthly_aed.split('(')[0].trim());
@@ -1112,12 +1032,12 @@
     }
 
     function getAtsBadge(score) {
-      if (!score) return '<span style="color: var(--text-dim)">&mdash;</span>';
+      if (!score) return '<span style="color: var(--text-tertiary)">&mdash;</span>';
       const num = parseInt(score, 10);
-      let cls = 'ats-low';
+      let cls = 'ats-neutral';
       if (num >= 88) cls = 'ats-high';
       else if (num >= 75) cls = 'ats-mid';
-      return `<span class="ats-badge ${cls}">${num}%</span>`;
+      return `<span class="ats-pill ${cls}">${num}%</span>`;
     }
 
     function getStatusBadge(st) {
@@ -1127,9 +1047,9 @@
 
     async function loadApplications() {
       const btn = document.getElementById('btnRefresh');
-      const ic = document.getElementById('refreshIcon');
+      const svg = document.getElementById('refreshSvg');
       btn.disabled = true;
-      ic.outerHTML = '<span class="spin" id="refreshIcon"></span>';
+      svg.classList.add('spin');
 
       try {
         const bp = location.pathname.endsWith('/') ? location.pathname : location.pathname + '/';
@@ -1140,16 +1060,15 @@
         RAW_DATA = json.rows || [];
         updateDashboard(json);
       } catch (err) {
-        console.error('Erreur chargement candidatures:', err);
+        console.error('Erreur:', err);
         document.getElementById('tableBody').innerHTML = `
-          <tr><td colspan="8" style="padding: 2rem; text-align: center; color: #ef4444;">
-            ⚠️ Erreur lors de la récupération des données : ${esc(err.message)}
+          <tr><td colspan="8" style="padding: 2rem; text-align: center; color: var(--apple-red-text);">
+            Erreur lors de la récupération des données : ${esc(err.message)}
           </td></tr>
         `;
       } finally {
-        const b = document.getElementById('btnRefresh');
-        b.disabled = false;
-        document.getElementById('refreshIcon')?.replaceWith(Object.assign(document.createElement('span'), { id: 'refreshIcon', textContent: '⟳' }));
+        btn.disabled = false;
+        svg.classList.remove('spin');
       }
     }
 
@@ -1166,7 +1085,7 @@
       const maxScore = scores.length ? Math.max(...scores) : 0;
       const avgScore = scores.length ? Math.round(scores.reduce((a,b)=>a+b, 0) / scores.length) : 0;
       document.getElementById('kpiAtsMax').textContent = maxScore + '%';
-      document.getElementById('kpiAtsAvg').textContent = `Moyenne : ${avgScore}% (${scores.length} scorés)`;
+      document.getElementById('kpiAtsAvg').textContent = `Moyenne : ${avgScore}% (${scores.length} qualifiés)`;
 
       const sent = RAW_DATA.filter(r => r.status === 'sent').length;
       const rejected = RAW_DATA.filter(r => r.status === 'rejected').length;
@@ -1207,17 +1126,17 @@
 
       container.innerHTML = deals.map(r => {
         const key = Object.keys(ACTIONS).find(k => String(r.company).includes(k));
-        const act = key ? ACTIONS[key] : { when: 'Entretien en cours', todo: 'Poursuivre le round de qualification et sécuriser les conditions.' };
+        const act = key ? ACTIONS[key] : { when: 'Entretien en cours', todo: 'Qualification et suivi du processus.' };
         return `
-          <div class="deal-card" onclick="openDrawerById(${r.id})">
-            <div class="deal-top">
-              <span class="deal-company">${esc(r.company)}</span>
+          <div class="priority-card" onclick="openDrawerById(${r.id})">
+            <div class="priority-top">
+              <span class="priority-company">${esc(r.company)}</span>
               ${getStatusBadge(r.status)}
             </div>
-            <div class="deal-role">${esc(r.role || 'Direction / Architecture')} &bull; <span style="color: var(--text-dim);">${esc(r.location || 'Remote')}</span></div>
-            <div class="deal-when">📅 ${esc(act.when)}</div>
-            <div class="deal-todo">${esc(act.todo)}</div>
-            <div style="font-size: 0.78rem; color: #60a5fa; font-weight: 600; margin-top: 0.2rem;">
+            <div class="priority-role">${esc(r.role || 'Direction Technique')} &bull; <span style="color: var(--text-tertiary);">${esc(r.location || 'Remote')}</span></div>
+            <div class="priority-when">${esc(act.when)}</div>
+            <div class="priority-todo">${esc(act.todo)}</div>
+            <div style="font-size: 0.78rem; color: var(--apple-blue); font-weight: 500; margin-top: 0.15rem;">
               ATS : ${r.ats_score_after ? r.ats_score_after + '%' : '--'} &bull; Rému : ${formatSalary(r.salary_benchmark)}
             </div>
           </div>
@@ -1227,10 +1146,7 @@
 
     function getFilteredRows() {
       return RAW_DATA.filter(r => {
-        // Status filter
         if (CURRENT_FILTER !== 'all' && r.status !== CURRENT_FILTER) return false;
-
-        // Search query
         if (SEARCH_QUERY) {
           const q = SEARCH_QUERY.toLowerCase();
           const matchCompany = (r.company || '').toLowerCase().includes(q);
@@ -1257,21 +1173,19 @@
       // Render Table
       const tb = document.getElementById('tableBody');
       if (!rows.length) {
-        tb.innerHTML = `<tr><td colspan="8" style="padding: 2.5rem; text-align: center; color: var(--text-dim);">Aucun dossier ne correspond aux filtres.</td></tr>`;
+        tb.innerHTML = `<tr><td colspan="8" style="padding: 2.5rem; text-align: center; color: var(--text-tertiary);">Aucun dossier ne correspond aux critères.</td></tr>`;
       } else {
         tb.innerHTML = rows.map((r, i) => `
           <tr class="app-row" onclick="openDrawerById(${r.id})">
             <td class="col-rank">${i + 1}</td>
-            <td class="col-company"><strong>${esc(r.company)}</strong></td>
+            <td class="col-company">${esc(r.company)}</td>
             <td class="col-role">${esc(r.role || '&mdash;')}</td>
             <td class="col-loc">${esc(r.location || '&mdash;')}</td>
             <td>${getAtsBadge(r.ats_score_after)}</td>
             <td>${getStatusBadge(r.status)}</td>
             <td class="col-remu">${formatSalary(r.salary_benchmark)}</td>
             <td style="text-align: right;">
-              <button class="nav-btn" style="background: rgba(255,255,255,0.06); padding: 0.3rem 0.65rem; font-size: 0.78rem;" onclick="event.stopPropagation(); openDrawerById(${r.id})">
-                Détails &rarr;
-              </button>
+              <span style="color: var(--apple-blue); font-size: 0.8rem; font-weight: 500;">Détails &rarr;</span>
             </td>
           </tr>
         `).join('');
@@ -1288,15 +1202,15 @@
             </div>
             ${getStatusBadge(r.status)}
           </div>
-          <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem;">
-            <span>📍</span> ${esc(r.location || 'Remote')}
+          <div style="font-size: 0.82rem; color: var(--text-secondary);">
+            ${esc(r.location || 'Remote')}
           </div>
-          <div style="font-size: 0.84rem; font-weight: 600; color: #60a5fa;">
+          <div style="font-size: 0.84rem; font-weight: 600; color: var(--apple-blue);">
             ${formatSalary(r.salary_benchmark)}
           </div>
           <div class="card-meta-row">
-            <span>Score ATS : <strong>${r.ats_score_after ? r.ats_score_after + '%' : '--'}</strong></span>
-            <span style="color: var(--primary); font-weight: 600;">Voir la fiche &rarr;</span>
+            <span>ATS : <strong>${r.ats_score_after ? r.ats_score_after + '%' : '--'}</strong></span>
+            <span style="color: var(--apple-blue); font-weight: 500;">Fiche détaillée &rarr;</span>
           </div>
         </div>
       `).join('');
@@ -1309,7 +1223,7 @@
 
     function filterStatus(st) {
       CURRENT_FILTER = st;
-      document.querySelectorAll('.chip-btn').forEach(btn => {
+      document.querySelectorAll('.filter-chip').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.status === st);
       });
       renderListing();
@@ -1352,9 +1266,8 @@
       document.getElementById('drawerStatusBadge').innerHTML = getStatusBadge(app.status);
       document.getElementById('drawerLocation').textContent = app.location || 'Non spécifié';
 
-      // Salary details
       const sb = app.salary_benchmark;
-      let salaryHtml = '<div style="color: var(--text-dim)">Aucune donnée de benchmark</div>';
+      let salaryHtml = '<div style="color: var(--text-tertiary)">Aucune donnée de benchmark</div>';
       if (sb) {
         if (typeof sb === 'string') {
           salaryHtml = `<div>${esc(sb)}</div>`;
@@ -1367,18 +1280,16 @@
               ${sb.range_year_eur ? `<div><strong>Fourchette Annuelle :</strong> ${esc(sb.range_year_eur)} €/an</div>` : ''}
               ${sb.base_year_eur ? `<div><strong>Salaire Base :</strong> ${esc(sb.base_year_eur)} €</div>` : ''}
               ${sb.day_rate ? `<div><strong>Taux Journalier (TJM) :</strong> ${esc(sb.day_rate)} €/j</div>` : ''}
-              ${sb.factors ? `<div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;"><em>Facteurs :</em> ${esc(sb.factors)}</div>` : ''}
-              ${sb.sources ? `<div style="font-size: 0.76rem; color: var(--text-dim);"><em>Sources :</em> ${esc(sb.sources)}</div>` : ''}
+              ${sb.factors ? `<div style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.25rem;"><em>Facteurs :</em> ${esc(sb.factors)}</div>` : ''}
+              ${sb.sources ? `<div style="font-size: 0.74rem; color: var(--text-tertiary);"><em>Sources :</em> ${esc(sb.sources)}</div>` : ''}
             </div>
           `;
         }
       }
       document.getElementById('drawerSalary').innerHTML = salaryHtml;
 
-      // Positioning
-      document.getElementById('drawerPositioning').textContent = app.positioning || 'Positionnement standard Direction Technique & Architecture IA.';
+      document.getElementById('drawerPositioning').textContent = app.positioning || 'Positionnement Direction Technique & Architecture IA.';
 
-      // Company Analysis
       const compSection = document.getElementById('drawerCompanySection');
       if (app.company_analysis) {
         compSection.style.display = 'flex';
@@ -1387,19 +1298,17 @@
         compSection.style.display = 'none';
       }
 
-      // Hard Gates & Keywords
       const gatesSection = document.getElementById('drawerGatesSection');
       if (app.hard_gates || app.keywords) {
         gatesSection.style.display = 'flex';
         let gatesHtml = '';
         if (app.hard_gates) gatesHtml += `<div><strong>Critères clés :</strong> ${esc(app.hard_gates)}</div>`;
-        if (app.keywords) gatesHtml += `<div style="margin-top: 0.4rem; font-size: 0.8rem; color: var(--text-muted);"><strong>Mots-clés :</strong> ${esc(app.keywords)}</div>`;
+        if (app.keywords) gatesHtml += `<div style="margin-top: 0.4rem; font-size: 0.8rem; color: var(--text-secondary);"><strong>Mots-clés :</strong> ${esc(app.keywords)}</div>`;
         document.getElementById('drawerGates').innerHTML = gatesHtml;
       } else {
         gatesSection.style.display = 'none';
       }
 
-      // Job Spec
       const specSection = document.getElementById('drawerSpecSection');
       if (app.job_spec) {
         specSection.style.display = 'flex';
@@ -1426,19 +1335,6 @@
     window.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeDrawer();
     });
-
-    function toggleTheme() {
-      const current = document.documentElement.getAttribute('data-theme') || 'light';
-      const next = current === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', next);
-      document.getElementById('themeIcon').textContent = next === 'light' ? '🌙' : '☀️';
-      localStorage.setItem('candidatures_theme', next);
-    }
-
-    // Default to light mode
-    const savedTheme = localStorage.getItem('candidatures_theme') || 'light';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    document.getElementById('themeIcon').textContent = savedTheme === 'light' ? '🌙' : '☀️';
 
     // Initial load
     loadApplications();
