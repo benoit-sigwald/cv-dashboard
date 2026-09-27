@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -50,16 +50,71 @@
     [data-theme="light"] {
       --bg: #f5f5f7;
       --bg-surface: #ffffff;
-      --bg-card: rgba(255, 255, 255, 0.85);
-      --bg-card-hover: #ffffff;
-      --bg-glass: rgba(255, 255, 255, 0.85);
+      --bg-card: #ffffff;
+      --bg-card-hover: #f8fafc;
+      --bg-glass: rgba(255, 255, 255, 0.88);
       --border-subtle: rgba(0, 0, 0, 0.08);
       --border-focus: #0071e3;
       --text-main: #1d1d1f;
       --text-muted: #6e6e73;
       --text-dim: #86868b;
-      --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
-      --shadow-elevated: 0 16px 40px rgba(0, 0, 0, 0.12);
+      --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.04);
+      --shadow-elevated: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    [data-theme="light"] body {
+      background: radial-gradient(circle at 50% 0%, #e8edf5 0%, var(--bg) 65%);
+    }
+
+    [data-theme="light"] .section-priority {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.06) 0%, rgba(0, 113, 227, 0.03) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+    }
+    [data-theme="light"] .priority-title { color: #059669; }
+    [data-theme="light"] .deal-card {
+      background: #ffffff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+    }
+    [data-theme="light"] .deal-when { color: #059669; }
+    [data-theme="light"] .deal-todo {
+      background: #f8fafc;
+      color: #4b5563;
+    }
+
+    [data-theme="light"] .search-input {
+      background: #ffffff;
+    }
+    [data-theme="light"] .select-sort,
+    [data-theme="light"] .segmented-control,
+    [data-theme="light"] .chip-btn {
+      background: #ffffff;
+    }
+    [data-theme="light"] .chip-btn:hover {
+      border-color: rgba(0, 0, 0, 0.18);
+    }
+
+    [data-theme="light"] .table-container {
+      background: #ffffff;
+    }
+    [data-theme="light"] th {
+      background: #f8fafc;
+    }
+    [data-theme="light"] tr.app-row:hover {
+      background: #f1f5f9;
+    }
+    [data-theme="light"] .col-remu {
+      color: #2563eb;
+    }
+
+    [data-theme="light"] .app-card {
+      background: #ffffff;
+    }
+    [data-theme="light"] .drawer-panel {
+      background: #ffffff;
+    }
+    [data-theme="light"] .drawer-box {
+      background: #f8fafc;
+      border-color: rgba(0, 0, 0, 0.06);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif; }
@@ -805,7 +860,7 @@
         </button>
 
         <button class="theme-toggle-btn" onclick="toggleTheme()" title="Basculer Thème Clair / Sombre">
-          <span id="themeIcon">☀️</span>
+          <span id="themeIcon">🌙</span>
         </button>
       </div>
     </div>
@@ -1373,19 +1428,17 @@
     });
 
     function toggleTheme() {
-      const current = document.documentElement.getAttribute('data-theme') || 'dark';
-      const next = current === 'dark' ? 'light' : 'dark';
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
       document.documentElement.setAttribute('data-theme', next);
-      document.getElementById('themeIcon').textContent = next === 'dark' ? '☀️' : '🌙';
+      document.getElementById('themeIcon').textContent = next === 'light' ? '🌙' : '☀️';
       localStorage.setItem('candidatures_theme', next);
     }
 
-    // Init theme from storage
-    const savedTheme = localStorage.getItem('candidatures_theme');
-    if (savedTheme) {
-      document.documentElement.setAttribute('data-theme', savedTheme);
-      document.getElementById('themeIcon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-    }
+    // Default to light mode
+    const savedTheme = localStorage.getItem('candidatures_theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    document.getElementById('themeIcon').textContent = savedTheme === 'light' ? '🌙' : '☀️';
 
     // Initial load
     loadApplications();
