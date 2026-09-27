@@ -1,177 +1,1394 @@
-<!doctype html>
-<html lang="fr">
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
 <head>
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="shortcut icon" href="favicon.ico">
-<meta charset="utf-8" />
-<base href="./" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Candidatures — Benoît SIGWALD</title>
-<style>
-  :root { --blue:#1F4E79; --line:#e4e4e4; --bg:#f4f6f9; --gray:#6b7280; }
-  * { box-sizing:border-box; }
-  body { margin:0; font-family:Calibri,'Segoe UI',system-ui,Arial,sans-serif; color:#1f2430; background:var(--bg); }
-  header { background:var(--blue); color:#fff; padding:16px 22px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
-  header h1 { font-size:19px; margin:0; font-weight:600; }
-  header .meta { font-size:13px; opacity:.85; }
-  .spacer { flex:1; }
-  button { background:#fff; color:var(--blue); border:0; border-radius:6px; padding:8px 16px; font-size:14px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:8px; }
-  button:hover { background:#eef3f9; }
-  button:disabled { opacity:.6; cursor:default; }
-  .wrap { padding:18px 22px 40px; }
-  .iv-wrap { background:#e1f5ee; border:1px solid #9fe1cb; border-radius:12px; padding:14px 16px; margin-bottom:18px; }
-  .iv-wrap h2 { margin:0 0 10px; font-size:15px; color:#0f6e56; }
-  .iv-cards { display:flex; gap:12px; flex-wrap:wrap; }
-  .iv-card { background:#fff; border-radius:10px; padding:12px 14px; flex:1; min-width:250px; box-shadow:0 1px 2px rgba(0,0,0,.06); border-left:4px solid #1D9E75; }
-  .iv-card .c { font-weight:700; color:#0f2c4d; font-size:15px; }
-  .iv-card .r { font-size:12.5px; color:var(--gray); margin:2px 0 7px; }
-  .iv-card .w { font-size:13px; }
-  .iv-card .a { font-size:13px; margin-top:6px; color:#334155; }
-  .iv-card a.btn2 { display:inline-block; margin-top:9px; background:#0f6e56; color:#fff; text-decoration:none; padding:6px 13px; border-radius:6px; font-size:13px; font-weight:600; }
-  .kpis { display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px; }
-  .kpi { background:#fff; border-radius:10px; padding:10px 16px; box-shadow:0 1px 2px rgba(0,0,0,.05); min-width:96px; }
-  .kpi .n { font-size:22px; font-weight:700; }
-  .kpi .l { font-size:12px; color:var(--gray); text-transform:uppercase; letter-spacing:.03em; }
-  table { width:100%; border-collapse:collapse; background:#fff; border-radius:10px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.06); font-size:14px; }
-  th,td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
-  th { background:#eef2f7; color:var(--blue); font-weight:600; position:sticky; top:0; cursor:pointer; white-space:nowrap; }
-  tr:hover td { background:#f7fafd; }
-  td.remu { font-weight:600; color:#0f2c4d; white-space:nowrap; }
-  td.rank { color:var(--gray); width:34px; }
-  td.ats b { display:inline-block; min-width:30px; text-align:center; background:#eef2f7; color:var(--blue); border-radius:5px; padding:1px 6px; }
-  .badge { display:inline-block; padding:2px 9px; border-radius:20px; font-size:12px; font-weight:600; white-space:nowrap; }
-  .b-offer { background:#eaf3de; color:#3b6d11; }
-  .b-interview { background:#e1f5ee; color:#0f6e56; }
-  .b-rejected { background:#fceaea; color:#a32d2d; }
-  .b-sent { background:#eef1f5; color:#5f6b7a; }
-  .b-draft { background:#faeeda; color:#854f0b; }
-  .err { background:#fceaea; color:#a32d2d; padding:12px 16px; border-radius:8px; margin-bottom:14px; }
-  .foot { color:var(--gray); font-size:12px; margin-top:14px; }
-  .spin { width:14px; height:14px; border:2px solid var(--blue); border-top-color:transparent; border-radius:50%; animation:s .7s linear infinite; }
-  @keyframes s { to { transform:rotate(360deg); } }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Candidatures & Pipeline Exécutif &mdash; Benoît SIGWALD | Arx Consulting</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="shortcut icon" href="favicon.ico">
+  <base href="./">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #090a10;
+      --bg-surface: #12141d;
+      --bg-card: rgba(22, 26, 38, 0.75);
+      --bg-card-hover: rgba(28, 33, 48, 0.85);
+      --bg-glass: rgba(14, 17, 26, 0.82);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-focus: #0071e3;
+
+      --primary: #0071e3;
+      --primary-hover: #0077ed;
+      --primary-glow: rgba(0, 113, 227, 0.28);
+
+      --emerald: #10b981;
+      --emerald-glow: rgba(16, 185, 129, 0.22);
+      --amber: #f59e0b;
+      --amber-glow: rgba(245, 158, 11, 0.22);
+      --purple: #8b5cf6;
+      --purple-glow: rgba(139, 92, 246, 0.22);
+      --red: #ef4444;
+
+      --text-main: #f5f5f7;
+      --text-muted: #86868b;
+      --text-dim: #636366;
+
+      --radius-xl: 18px;
+      --radius-lg: 14px;
+      --radius-md: 10px;
+      --radius-sm: 6px;
+      --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.35);
+      --shadow-elevated: 0 16px 40px rgba(0, 0, 0, 0.5);
+      --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="light"] {
+      --bg: #f5f5f7;
+      --bg-surface: #ffffff;
+      --bg-card: rgba(255, 255, 255, 0.85);
+      --bg-card-hover: #ffffff;
+      --bg-glass: rgba(255, 255, 255, 0.85);
+      --border-subtle: rgba(0, 0, 0, 0.08);
+      --border-focus: #0071e3;
+      --text-main: #1d1d1f;
+      --text-muted: #6e6e73;
+      --text-dim: #86868b;
+      --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --shadow-elevated: 0 16px 40px rgba(0, 0, 0, 0.12);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif; }
+
+    body {
+      background: radial-gradient(circle at 50% 0%, #151928 0%, var(--bg) 65%);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+      transition: background 0.3s ease;
+    }
+
+    /* ---- Navigation Top Bar ---- */
+    header.apple-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-glass);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.75rem 1.5rem;
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-logo-badge {
+      width: 38px;
+      height: 38px;
+      background: var(--primary);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+
+    .brand-logo-badge img {
+      width: 22px;
+      height: 22px;
+      object-fit: contain;
+    }
+
+    .brand-titles h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+
+    .brand-titles p {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      letter-spacing: -0.01em;
+    }
+
+    .nav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-md);
+      font-size: 0.84rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .nav-btn-contacts {
+      background: rgba(0, 113, 227, 0.14);
+      color: #58a6ff;
+      border-color: rgba(0, 113, 227, 0.32);
+    }
+    .nav-btn-contacts:hover {
+      background: rgba(0, 113, 227, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn-monitor {
+      background: rgba(16, 185, 129, 0.14);
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.32);
+    }
+    .nav-btn-monitor:hover {
+      background: rgba(16, 185, 129, 0.25);
+      transform: translateY(-1px);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .btn-refresh {
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      padding: 0.45rem 0.95rem;
+      border-radius: var(--radius-md);
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      box-shadow: 0 4px 12px var(--primary-glow);
+      transition: var(--transition);
+    }
+    .btn-refresh:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+    .btn-refresh:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    .theme-toggle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-md);
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .theme-toggle-btn:hover {
+      border-color: var(--primary);
+    }
+
+    /* ---- Main Content Layout ---- */
+    main.main-content {
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem 4rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+
+    /* ---- KPIs Grid ---- */
+    .kpis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.15rem 1.25rem;
+      box-shadow: var(--shadow-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card:hover {
+      border-color: rgba(255, 255, 255, 0.16);
+      transform: translateY(-2px);
+    }
+
+    .kpi-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; height: 3px;
+      background: transparent;
+    }
+    .kpi-card.blue::before { background: var(--primary); }
+    .kpi-card.emerald::before { background: var(--emerald); }
+    .kpi-card.purple::before { background: var(--purple); }
+    .kpi-card.amber::before { background: var(--amber); }
+
+    .kpi-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    .kpi-val {
+      font-size: 1.85rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .kpi-sub {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    /* ---- Priority Deals Section ---- */
+    .section-priority {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(0, 113, 227, 0.04) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-radius: var(--radius-xl);
+      padding: 1.35rem 1.5rem;
+    }
+
+    .priority-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .priority-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #34d399;
+    }
+
+    .priority-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1rem;
+    }
+
+    .deal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--emerald);
+      border-radius: var(--radius-lg);
+      padding: 1.1rem 1.25rem;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .deal-card:hover {
+      border-color: rgba(16, 185, 129, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px var(--emerald-glow);
+    }
+
+    .deal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .deal-company {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .deal-role {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .deal-when {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #34d399;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .deal-todo {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 0.55rem 0.75rem;
+      border-radius: var(--radius-sm);
+    }
+
+    /* ---- Controls Bar ---- */
+    .controls-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .controls-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      flex: 1;
+      min-width: 260px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.65rem 1rem 0.65rem 2.5rem;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      outline: none;
+      transition: var(--transition);
+    }
+    .search-input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.85rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-dim);
+      pointer-events: none;
+    }
+
+    .controls-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .select-sort {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      color: var(--text-main);
+      padding: 0.6rem 0.85rem;
+      font-size: 0.84rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .segmented-control {
+      display: inline-flex;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .segmented-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.4rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: var(--transition);
+    }
+    .segmented-btn.active {
+      background: var(--primary);
+      color: #fff;
+      box-shadow: 0 2px 8px var(--primary-glow);
+    }
+
+    .filter-chips {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .chip-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      border-radius: 20px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: var(--transition);
+    }
+    .chip-btn:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--text-main);
+    }
+    .chip-btn.active {
+      background: var(--primary);
+      color: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 2px 10px var(--primary-glow);
+    }
+    .chip-count {
+      opacity: 0.8;
+      font-size: 0.74rem;
+    }
+
+    /* ---- Table View ---- */
+    .table-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      overflow-x: auto;
+      box-shadow: var(--shadow-card);
+    }
+
+    table.app-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      text-align: left;
+    }
+
+    th {
+      background: var(--bg-surface);
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      position: sticky;
+      top: 0;
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+    }
+    th:hover { color: var(--text-main); }
+
+    td {
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid var(--border-subtle);
+      vertical-align: middle;
+    }
+
+    tr.app-row {
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    tr.app-row:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .col-rank { color: var(--text-dim); font-size: 0.8rem; width: 40px; }
+    .col-company { font-weight: 700; color: var(--text-main); font-size: 0.95rem; }
+    .col-role { color: var(--text-main); font-weight: 500; }
+    .col-loc { color: var(--text-muted); font-size: 0.82rem; }
+    .col-remu { font-weight: 600; color: #60a5fa; white-space: nowrap; font-family: "JetBrains Mono", monospace; font-size: 0.84rem; }
+
+    /* ---- Status Badges ---- */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.28rem 0.65rem;
+      border-radius: 20px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      white-space: nowrap;
+      letter-spacing: -0.01em;
+    }
+
+    .badge-offer { background: rgba(16, 185, 129, 0.16); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .badge-interview { background: rgba(0, 113, 227, 0.16); color: #60a5fa; border: 1px solid rgba(0, 113, 227, 0.3); }
+    .badge-sent { background: rgba(139, 92, 246, 0.16); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.3); }
+    .badge-draft { background: rgba(245, 158, 11, 0.16); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+    .badge-rejected { background: rgba(239, 68, 68, 0.14); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.25); }
+
+    /* ---- ATS Gauge Badge ---- */
+    .ats-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.22rem 0.55rem;
+      border-radius: 8px;
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 700;
+      font-size: 0.84rem;
+    }
+    .ats-high { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+    .ats-mid { background: rgba(0, 113, 227, 0.15); color: #60a5fa; border: 1px solid rgba(0, 113, 227, 0.3); }
+    .ats-low { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+
+    /* ---- Cards Grid View ---- */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.15rem;
+    }
+
+    .app-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      box-shadow: var(--shadow-card);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .app-card:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+
+    .card-comp {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .card-role {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .card-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* ---- Slide-Over Drawer ---- */
+    .drawer-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: none;
+      align-items: flex-start;
+      justify-content: flex-end;
+    }
+    .drawer-overlay.active {
+      display: flex;
+    }
+
+    .drawer-panel {
+      background: var(--bg-surface);
+      border-left: 1px solid var(--border-subtle);
+      width: 100%;
+      max-width: 600px;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
+      animation: slideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    .drawer-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 1.25rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .drawer-close {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+    .drawer-close:hover { background: rgba(255, 255, 255, 0.1); }
+
+    .drawer-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .drawer-section-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .drawer-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 0.9rem 1.1rem;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      color: var(--text-main);
+    }
+
+    .drawer-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    /* ---- Footer ---- */
+    footer.app-footer {
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      align-items: center;
+    }
+
+    .spin {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #fff;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spinAnim 0.7s linear infinite;
+    }
+    @keyframes spinAnim { to { transform: rotate(360deg); } }
+
+    @media (max-width: 768px) {
+      .nav-container { flex-direction: column; align-items: flex-start; }
+      .drawer-panel { max-width: 100%; }
+      .priority-cards { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>Candidatures — Benoît SIGWALD</h1>
-  <span class="meta" id="meta"></span>
-  <span class="spacer"></span>
-  <button id="refresh" onclick="load()"><span id="ricon">⟳</span> Refresh</button>
-</header>
-<div class="wrap">
-  <div id="interviews"></div>
-  <div class="kpis" id="kpis"></div>
-  <div id="error"></div>
-  <table id="tbl">
-    <thead>
-      <tr>
-        <th data-k="rank">#</th>
-        <th data-k="company">Entreprise</th>
-        <th data-k="role">Poste</th>
-        <th data-k="location">Lieu</th>
-        <th data-k="ats">ATS</th>
-        <th data-k="status">Statut</th>
-        <th data-k="remu">Rému cible</th>
-      </tr>
-    </thead>
-    <tbody id="rows"><tr><td colspan="7" style="padding:24px;color:#6b7280">Chargement…</td></tr></tbody>
-  </table>
-  <div class="foot" id="foot"></div>
-</div>
-<script>
-const STATUS = { offer:['🏆 Accord','b-offer'], interview:['Entretien','b-interview'], rejected:['Rejeté','b-rejected'], sent:['Envoyé','b-sent'], draft:['Brouillon','b-draft'] };
-const ACTIONS = {
-  'LTM': { when:'Call fait 13/08 — Right to Represent signé', todo:'Screening Sai (Blue Ocean) passé, mandat exclusif signé. Rému mini déclarée 140-150 k€ base. Prochaine étape : Sai soumet le profil au client LTM = LTIMindtree → entretien client. Rien à faire, attendre le retour.' },
-  '3Point': { when:'🏆 ACCORD 13/08 — contractor puis salariat', todo:'Accord avec Mike Connaughton (CTO) : démarrage en contractor, puis salariat £150k base + 20 % bonus (package £180k ≈ 212 k€). À sécuriser avant signature : durée de la phase contractor + date de bascule écrites ; TJM 900-1000 £/j (plancher 850, neutre vs leur coût employeur 208-216 k£) ; IR35 et lieu d’exécution à faire valider ; facture HT hors champ TVA FR (art. 259-1 CGI) + n° TVA UK ; frais UK au réel ou per diem ; titre, commission, equity.' },
-  'Accenture': { role:'Senior Manager', when:'Screen réalisé (4 août)', todo:'Screen RH passé (Magdalena Gurau). En attente du retour / prochain round. Relancer si silence >1 semaine.' },
-  'WA.Technology': { when:'Entretien réalisé — décision ≈14-15/08', todo:'Entretien RH passé (Zsofia + Manon), retour positif, suivi envoyé (site + GitHub). MAJ 07/08 : 1er tour encore en cours (entretiens la semaine prochaine) → décision au plus tard fin de semaine du 11-15/08.' },
-  'Infotel': { when:'À CALER', todo:'Infotel Monaco (Sandrine Tixier) demande un 1er échange téléphonique (parcours + attentes). Répondre pour fixer un créneau. ⭐ Local.' },
-  'Church': { when:'Chez le hiring manager', todo:'Candidature transmise au hiring manager (BNP). Démarrage prévu 15/09 — pas d’urgence. Relancer Lydia mi-août si silence.' }
-};
-let DATA = [], sortK='ats', sortDir=-1;
 
-function remu(sb){
-  if(!sb) return '—';
-  const p=[]; const g=(k)=>sb[k];
-  if(g('range_year_eur')) p.push(g('range_year_eur')+' €/an');
-  else if(g('base_year_eur')||g('package_year_eur')) p.push((g('base_year_eur')||'')+ (g('package_year_eur')?(' · pkg '+g('package_year_eur')):'') );
-  else if(g('range_year')) p.push(g('range_year')+' '+(g('currency')||''));
-  else if(g('base_year_'+ (g('currency')||'').toLowerCase())) p.push(g('base_year_'+(g('currency')||'').toLowerCase())+' '+(g('currency')||''));
-  if(g('day_rate')) p.push('TJM '+g('day_rate')+' €/j');
-  if(g('fourchette_profil') && !p.length) p.push(String(g('fourchette_profil')).slice(0,60));
-  if(!p.length){ const v=Object.values(sb).find(x=>typeof x==='string'); return v?String(v).slice(0,50):'—'; }
-  return p.join(' · ');
-}
-function badge(s){ const [t,c]=STATUS[s]||[s||'—','b-sent']; return '<span class="badge '+c+'">'+t+'</span>'; }
-function esc(x){ return (x==null?'':String(x)).replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m])); }
+  <!-- Top Navigation Header -->
+  <header class="apple-nav">
+    <div class="nav-container">
+      <div class="nav-left">
+        <a href="./" class="brand-group">
+          <div class="brand-logo-badge">
+            <img src="assets/arx-logo-blanc.png" alt="Arx Logo" onerror="this.src='favicon.png'">
+          </div>
+          <div class="brand-titles">
+            <h1>Candidatures &bull; Pipeline Exécutif</h1>
+            <p>Benoît SIGWALD &mdash; Direction Technique & Architecture IA</p>
+          </div>
+        </a>
 
-function render(){
-  const rows = DATA.slice().sort((a,b)=>{
-    let va,vb;
-    if(sortK==='ats'){ va=a.ats_score_after||0; vb=b.ats_score_after||0; }
-    else if(sortK==='remu'){ va=remu(a.salary_benchmark); vb=remu(b.salary_benchmark); }
-    else { va=(a[sortK==='company'?'company':sortK==='role'?'role':sortK==='location'?'location':sortK==='status'?'status':'company']||''); vb=(b[sortK==='company'?'company':sortK==='role'?'role':sortK==='location'?'location':sortK==='status'?'status':'company']||''); }
-    return (va<vb?-1:va>vb?1:0)*sortDir;
-  });
-  document.getElementById('rows').innerHTML = rows.map((r,i)=>
-    '<tr><td class="rank">'+(i+1)+'</td>'+
-    '<td><b>'+esc(r.company)+'</b></td>'+
-    '<td>'+esc(r.role)+'</td>'+
-    '<td>'+esc(r.location||'—')+'</td>'+
-    '<td class="ats">'+(r.ats_score_after?('<b>'+r.ats_score_after+'</b>'):'—')+'</td>'+
-    '<td>'+badge(r.status)+'</td>'+
-    '<td class="remu">'+esc(remu(r.salary_benchmark))+'</td></tr>'
-  ).join('');
-  const c=(s)=>DATA.filter(r=>r.status===s).length;
-  document.getElementById('kpis').innerHTML =
-    kpi(DATA.length,'Total') + kpi(c('interview'),'Entretiens') + kpi(c('rejected'),'Rejets') + kpi(c('sent'),'En attente');
-}
-function kpi(n,l){ return '<div class="kpi"><div class="n">'+n+'</div><div class="l">'+l+'</div></div>'; }
-function shortName(c){ return String(c||'').split(' (')[0]; }
-function renderInterviews(){
-  const el=document.getElementById('interviews');
-  const ivs=DATA.filter(r=>r.status==='interview'||r.status==='offer')
-                .sort((a,b)=>(a.status==='offer'?-1:0)-(b.status==='offer'?-1:0));
-  if(!ivs.length){ el.innerHTML=''; return; }
-  el.innerHTML='<div class="iv-wrap"><h2>🟢 En cours &amp; actions à prendre</h2><div class="iv-cards">'+
-    ivs.map(r=>{
-      const key=Object.keys(ACTIONS).find(k=>String(r.company).includes(k) && (!ACTIONS[k].role || String(r.role||'').includes(ACTIONS[k].role)));
-      const a=key?ACTIONS[key]:{when:'À planifier',todo:'Préparer / relancer.'};
-      return '<div class="iv-card"><div class="c">'+esc(shortName(r.company))+'</div>'+
-        '<div class="r">'+esc(r.role||'')+'</div>'+
-        '<div class="w">📅 <b>'+esc(a.when)+'</b></div>'+
-        '<div class="a">▸ '+esc(a.todo)+'</div>'+
-        (a.link?'<a class="btn2" href="'+a.link+'" target="_blank" rel="noopener">Réserver le créneau ↗</a>':'')+
-        '</div>';
-    }).join('')+'</div></div>';
-}
+        <!-- Fast Links to Contacts & Monitor -->
+        <a href="/contacts/" class="nav-btn nav-btn-contacts" title="Ouvrir la base Décideurs Région Sud">
+          <span>📇</span> Contacts
+        </a>
 
-async function load(){
-  const btn=document.getElementById('refresh'), ic=document.getElementById('ricon');
-  btn.disabled=true; ic.outerHTML='<span class="spin" id="ricon"></span>';
-  document.getElementById('error').innerHTML='';
-  try{
-    const bp=(location.pathname.endsWith('/')?location.pathname:location.pathname+'/');
-    const r=await fetch(bp+'api/applications',{cache:'no-store'});
-    const j=await r.json();
-    if(!j.ok) throw new Error(j.error||'API error');
-    DATA=j.rows; renderInterviews(); render();
-    document.getElementById('meta').textContent = j.count+' candidatures';
-    document.getElementById('foot').textContent = 'Source : PostgreSQL/OCI (db-cv) · maj '+new Date(j.updated).toLocaleString('fr-FR');
-  }catch(e){
-    document.getElementById('error').innerHTML='<div class="err">Erreur de chargement : '+esc(e.message)+'</div>';
-  }finally{
-    const b=document.getElementById('refresh'); b.disabled=false;
-    document.getElementById('ricon')?.replaceWith(Object.assign(document.createElement('span'),{id:'ricon',textContent:'⟳'}));
-  }
-}
-document.querySelectorAll('th[data-k]').forEach(th=>th.onclick=()=>{
-  const k=th.dataset.k; if(k==='rank')return;
-  if(sortK===k) sortDir*=-1; else { sortK=k; sortDir = (k==='ats')?-1:1; }
-  render();
-});
-load();
-</script>
-<script defer src="https://arx-apps.duckdns.org/gate/t.js" data-site="candidatures"></script>
+        <a href="/contacts/monitor.html" class="nav-btn nav-btn-monitor" title="Supervision continue Scraper">
+          <span>📊</span> Scraper Monitor
+        </a>
+      </div>
+
+      <div class="nav-right">
+        <button id="btnRefresh" class="btn-refresh" onclick="loadApplications()">
+          <span id="refreshIcon">⟳</span>
+          <span>Actualiser</span>
+          <span id="countBadge" style="background: rgba(255,255,255,0.2); padding: 2px 6px; border-radius: 10px; font-size: 0.75rem;">...</span>
+        </button>
+
+        <button class="theme-toggle-btn" onclick="toggleTheme()" title="Basculer Thème Clair / Sombre">
+          <span id="themeIcon">☀️</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Dashboard Content -->
+  <main class="main-content">
+
+    <!-- KPI Summary Ribbon -->
+    <div class="kpis-grid">
+      <div class="kpi-card blue">
+        <span class="kpi-label">Dossiers Totaux</span>
+        <span class="kpi-val" id="kpiTotal">0</span>
+        <span class="kpi-sub" id="kpiTotalSub">PostgREST db-cv synchronisé</span>
+      </div>
+
+      <div class="kpi-card emerald">
+        <span class="kpi-label">🏆 Accords & Entretiens</span>
+        <span class="kpi-val" id="kpiInterviews" style="color: #34d399;">0</span>
+        <span class="kpi-sub">Processus qualifiés en cours</span>
+      </div>
+
+      <div class="kpi-card purple">
+        <span class="kpi-label">Score ATS Maximum</span>
+        <span class="kpi-val" id="kpiAtsMax" style="color: #c4b5fd;">0%</span>
+        <span class="kpi-sub" id="kpiAtsAvg">Moyenne: --%</span>
+      </div>
+
+      <div class="kpi-card amber">
+        <span class="kpi-label">Benchmark Cible</span>
+        <span class="kpi-val" id="kpiRemu" style="font-size: 1.45rem;">150 - 250 k€</span>
+        <span class="kpi-sub">Ou TJM 900 - 1 200 €/j</span>
+      </div>
+
+      <div class="kpi-card blue">
+        <span class="kpi-label">En Attente / Rejetés</span>
+        <span class="kpi-val" id="kpiSentPending">0</span>
+        <span class="kpi-sub" id="kpiSentSub">Pipeline actif</span>
+      </div>
+    </div>
+
+    <!-- Active Deals & Next Actions -->
+    <section class="section-priority" id="sectionPriority">
+      <div class="priority-header">
+        <h2 class="priority-title">
+          <span>🟢</span> Processus en Cours &amp; Actions Prioritaires
+        </h2>
+        <span style="font-size: 0.8rem; color: var(--text-dim);" id="prioritySub">Suivi stratégique des accords</span>
+      </div>
+      <div class="priority-cards" id="priorityContainer">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <!-- Interactive Filters & Controls Bar -->
+    <div class="controls-bar">
+      <div class="controls-top">
+        <div class="search-box">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" class="search-input" placeholder="Rechercher par entreprise, poste, lieu, mots-clés..." oninput="handleSearch()">
+        </div>
+
+        <div class="controls-actions">
+          <select id="sortSelect" class="select-sort" onchange="handleSort(this.value)">
+            <option value="ats_desc">Score ATS (Plus élevé)</option>
+            <option value="ats_asc">Score ATS (Plus bas)</option>
+            <option value="company_asc">Entreprise (A &rarr; Z)</option>
+            <option value="status">Par Statut</option>
+            <option value="recent">Plus récents</option>
+          </select>
+
+          <div class="segmented-control">
+            <button class="segmented-btn active" id="btnViewTable" onclick="setViewMode('table')">
+              <span>📋</span> Tableau
+            </button>
+            <button class="segmented-btn" id="btnViewCards" onclick="setViewMode('cards')">
+              <span>🗂️</span> Cartes
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filter Chips -->
+      <div class="filter-chips" id="filterChips">
+        <button class="chip-btn active" data-status="all" onclick="filterStatus('all')">
+          Tous <span class="chip-count" id="chipCountAll">(0)</span>
+        </button>
+        <button class="chip-btn" data-status="offer" onclick="filterStatus('offer')">
+          🏆 Accords <span class="chip-count" id="chipCountOffer">(0)</span>
+        </button>
+        <button class="chip-btn" data-status="interview" onclick="filterStatus('interview')">
+          🎙️ Entretiens <span class="chip-count" id="chipCountInterview">(0)</span>
+        </button>
+        <button class="chip-btn" data-status="sent" onclick="filterStatus('sent')">
+          ⏳ En attente <span class="chip-count" id="chipCountSent">(0)</span>
+        </button>
+        <button class="chip-btn" data-status="draft" onclick="filterStatus('draft')">
+          📝 Brouillons <span class="chip-count" id="chipCountDraft">(0)</span>
+        </button>
+        <button class="chip-btn" data-status="rejected" onclick="filterStatus('rejected')">
+          ❌ Rejets <span class="chip-count" id="chipCountRejected">(0)</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Table View -->
+    <div class="table-container" id="tableViewContainer">
+      <table class="app-table">
+        <thead>
+          <tr>
+            <th class="col-rank" onclick="toggleSort('rank')">#</th>
+            <th onclick="toggleSort('company')">Entreprise</th>
+            <th onclick="toggleSort('role')">Poste &bull; Mission</th>
+            <th onclick="toggleSort('location')">Localisation</th>
+            <th onclick="toggleSort('ats')">Score ATS</th>
+            <th onclick="toggleSort('status')">Statut</th>
+            <th onclick="toggleSort('remu')">Rémunération Cible</th>
+            <th style="text-align: right;">Action</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody">
+          <tr><td colspan="8" style="padding: 2.5rem; text-align: center; color: var(--text-dim);">Chargement des dossiers depuis la base PostgREST...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Cards View -->
+    <div class="cards-grid" id="cardsViewContainer" style="display: none;">
+      <!-- Populated by JS -->
+    </div>
+
+  </main>
+
+  <!-- Slide-Over Drawer for Application Details -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="handleBackdropClick(event)">
+    <div class="drawer-panel" id="drawerPanel">
+      <div class="drawer-header">
+        <div>
+          <div id="drawerCompany" style="font-size: 1.4rem; font-weight: 800;">Entreprise</div>
+          <div id="drawerRole" style="font-size: 1rem; color: var(--text-muted); font-weight: 500;">Poste</div>
+        </div>
+        <button class="drawer-close" onclick="closeDrawer()" title="Fermer (Échap)">&times;</button>
+      </div>
+
+      <!-- Quick Metrics Strip -->
+      <div class="drawer-grid-2">
+        <div class="drawer-box">
+          <div class="drawer-section-title">Score ATS</div>
+          <div id="drawerAtsWrap" style="margin-top: 0.35rem; display: flex; align-items: baseline; gap: 0.5rem;">
+            <span id="drawerAtsScore" style="font-size: 1.6rem; font-weight: 800; color: #34d399;">--</span>
+            <span id="drawerAtsBefore" style="font-size: 0.85rem; color: var(--text-dim); text-decoration: line-through;"></span>
+          </div>
+        </div>
+
+        <div class="drawer-box">
+          <div class="drawer-section-title">Statut Actuel</div>
+          <div id="drawerStatusBadge" style="margin-top: 0.35rem;">--</div>
+        </div>
+      </div>
+
+      <!-- Location & Lang -->
+      <div class="drawer-box">
+        <div class="drawer-section-title">Localisation &amp; Modalités</div>
+        <div id="drawerLocation" style="font-weight: 600; margin-top: 0.2rem;">--</div>
+      </div>
+
+      <!-- Compensation / Salary Benchmark -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">Benchmark Salarial &amp; Rémunération</div>
+        <div class="drawer-box" id="drawerSalary">--</div>
+      </div>
+
+      <!-- Strategy & Positioning -->
+      <div class="drawer-section">
+        <div class="drawer-section-title">Positionnement Stratégique</div>
+        <div class="drawer-box" id="drawerPositioning">--</div>
+      </div>
+
+      <!-- Company Analysis -->
+      <div class="drawer-section" id="drawerCompanySection">
+        <div class="drawer-section-title">Analyse Entreprise &amp; Enjeux</div>
+        <div class="drawer-box" id="drawerCompanyAnalysis">--</div>
+      </div>
+
+      <!-- Hard Gates & Keywords -->
+      <div class="drawer-section" id="drawerGatesSection">
+        <div class="drawer-section-title">Hard Gates &amp; Mots-Clés ATS</div>
+        <div class="drawer-box" id="drawerGates">--</div>
+      </div>
+
+      <!-- Job Spec Preview -->
+      <div class="drawer-section" id="drawerSpecSection">
+        <div class="drawer-section-title">Description du Poste / Spécifications</div>
+        <div class="drawer-box" id="drawerJobSpec" style="max-height: 220px; overflow-y: auto; white-space: pre-wrap; font-size: 0.82rem; font-family: monospace;">--</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div>Plateforme Exécutive <strong>Arx Consulting</strong> &bull; Alimentée par PostgreSQL &amp; PostgREST (OCI)</div>
+    <div id="footerMeta" style="font-size: 0.76rem; color: var(--text-dim);">Dernière synchronisation : --</div>
+  </footer>
+
+  <script>
+    // Known strategic actions for priority opportunities
+    const ACTIONS = {
+      'LTM': { when:'Call fait 13/08 — Right to Represent signé', todo:'Screening Sai (Blue Ocean) passé, mandat exclusif signé. Rému mini déclarée 140-150 k€ base. Prochaine étape : Sai soumet le profil au client LTM = LTIMindtree → entretien client.' },
+      '3Point': { when:'🏆 ACCORD 13/08 — contractor puis salariat', todo:'Accord avec Mike Connaughton (CTO) : démarrage en contractor, puis salariat £150k base + 20 % bonus (package £180k ≈ 212 k€). TJM 900-1000 £/j.' },
+      'Accenture': { role:'Senior Manager', when:'Screen réalisé (4 août)', todo:'Screen RH passé (Magdalena Gurau). En attente du retour / prochain round. Relancer si silence >1 semaine.' },
+      'WA.Technology': { when:'Entretien réalisé — décision ≈14-15/08', todo:'Entretien RH passé (Zsofia + Manon), retour positif, suivi envoyé (site + GitHub).' },
+      'Infotel': { when:'À CALER', todo:'Infotel Monaco (Sandrine Tixier) demande un 1er échange téléphonique (parcours + attentes). ⭐ Local.' },
+      'Church': { when:'Chez le hiring manager', todo:'Candidature transmise au hiring manager (BNP). Démarrage prévu 15/09.' }
+    };
+
+    const STATUS_MAP = {
+      offer: { label: '🏆 Accord Obtenu', cls: 'badge-offer' },
+      interview: { label: '🎙️ Entretien', cls: 'badge-interview' },
+      sent: { label: '⏳ En Attente', cls: 'badge-sent' },
+      draft: { label: '📝 Brouillon', cls: 'badge-draft' },
+      rejected: { label: '❌ Rejeté', cls: 'badge-rejected' }
+    };
+
+    let RAW_DATA = [];
+    let CURRENT_FILTER = 'all';
+    let SEARCH_QUERY = '';
+    let SORT_BY = 'ats_desc';
+    let VIEW_MODE = 'table';
+
+    function esc(s) {
+      if (s == null) return '';
+      return String(s).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+    }
+
+    function formatSalary(sb) {
+      if (!sb) return '&mdash;';
+      if (typeof sb === 'string') return esc(sb);
+      const parts = [];
+      if (sb.package_year_eur) parts.push(sb.package_year_eur + ' (pkg)');
+      else if (sb.range_year_eur) parts.push(sb.range_year_eur + ' €/an');
+      else if (sb.base_year_eur) parts.push(sb.base_year_eur + ' € base');
+      else if (sb.market_range_monthly_aed) parts.push(sb.market_range_monthly_aed.split('(')[0].trim());
+      else if (sb.range_year) parts.push(sb.range_year + ' ' + (sb.currency || ''));
+      else if (sb.base_year) parts.push(sb.base_year + ' ' + (sb.currency || ''));
+
+      if (sb.day_rate) parts.push('TJM ' + sb.day_rate + ' €/j');
+      if (!parts.length && sb.fourchette_profil) parts.push(String(sb.fourchette_profil).slice(0, 50));
+      return parts.length ? parts.join(' &bull; ') : '&mdash;';
+    }
+
+    function getAtsBadge(score) {
+      if (!score) return '<span style="color: var(--text-dim)">&mdash;</span>';
+      const num = parseInt(score, 10);
+      let cls = 'ats-low';
+      if (num >= 88) cls = 'ats-high';
+      else if (num >= 75) cls = 'ats-mid';
+      return `<span class="ats-badge ${cls}">${num}%</span>`;
+    }
+
+    function getStatusBadge(st) {
+      const info = STATUS_MAP[st] || { label: st || 'Inconnu', cls: 'badge-sent' };
+      return `<span class="badge ${info.cls}">${info.label}</span>`;
+    }
+
+    async function loadApplications() {
+      const btn = document.getElementById('btnRefresh');
+      const ic = document.getElementById('refreshIcon');
+      btn.disabled = true;
+      ic.outerHTML = '<span class="spin" id="refreshIcon"></span>';
+
+      try {
+        const bp = location.pathname.endsWith('/') ? location.pathname : location.pathname + '/';
+        const res = await fetch(bp + 'api/applications', { cache: 'no-store' });
+        const json = await res.json();
+        if (!json.ok) throw new Error(json.error || 'Erreur API');
+
+        RAW_DATA = json.rows || [];
+        updateDashboard(json);
+      } catch (err) {
+        console.error('Erreur chargement candidatures:', err);
+        document.getElementById('tableBody').innerHTML = `
+          <tr><td colspan="8" style="padding: 2rem; text-align: center; color: #ef4444;">
+            ⚠️ Erreur lors de la récupération des données : ${esc(err.message)}
+          </td></tr>
+        `;
+      } finally {
+        const b = document.getElementById('btnRefresh');
+        b.disabled = false;
+        document.getElementById('refreshIcon')?.replaceWith(Object.assign(document.createElement('span'), { id: 'refreshIcon', textContent: '⟳' }));
+      }
+    }
+
+    function updateDashboard(json) {
+      // 1. KPIs
+      const total = RAW_DATA.length;
+      document.getElementById('kpiTotal').textContent = total;
+      document.getElementById('countBadge').textContent = total;
+
+      const interviews = RAW_DATA.filter(r => r.status === 'interview' || r.status === 'offer').length;
+      document.getElementById('kpiInterviews').textContent = interviews;
+
+      const scores = RAW_DATA.map(r => r.ats_score_after).filter(s => typeof s === 'number' && s > 0);
+      const maxScore = scores.length ? Math.max(...scores) : 0;
+      const avgScore = scores.length ? Math.round(scores.reduce((a,b)=>a+b, 0) / scores.length) : 0;
+      document.getElementById('kpiAtsMax').textContent = maxScore + '%';
+      document.getElementById('kpiAtsAvg').textContent = `Moyenne : ${avgScore}% (${scores.length} scorés)`;
+
+      const sent = RAW_DATA.filter(r => r.status === 'sent').length;
+      const rejected = RAW_DATA.filter(r => r.status === 'rejected').length;
+      document.getElementById('kpiSentPending').textContent = `${sent} / ${rejected}`;
+      document.getElementById('kpiSentSub').textContent = `${sent} envoyés · ${rejected} rejets`;
+
+      // 2. Chip counts
+      const counts = { all: total, offer: 0, interview: 0, sent: 0, draft: 0, rejected: 0 };
+      RAW_DATA.forEach(r => { if (counts[r.status] !== undefined) counts[r.status]++; });
+      document.getElementById('chipCountAll').textContent = `(${counts.all})`;
+      document.getElementById('chipCountOffer').textContent = `(${counts.offer})`;
+      document.getElementById('chipCountInterview').textContent = `(${counts.interview})`;
+      document.getElementById('chipCountSent').textContent = `(${counts.sent})`;
+      document.getElementById('chipCountDraft').textContent = `(${counts.draft})`;
+      document.getElementById('chipCountRejected').textContent = `(${counts.rejected})`;
+
+      // 3. Priority Deals
+      renderPriorityDeals();
+
+      // 4. Main listing
+      renderListing();
+
+      // 5. Footer metadata
+      if (json.updated) {
+        document.getElementById('footerMeta').textContent = 'Synchronisé le ' + new Date(json.updated).toLocaleString('fr-FR');
+      }
+    }
+
+    function renderPriorityDeals() {
+      const container = document.getElementById('priorityContainer');
+      const deals = RAW_DATA.filter(r => r.status === 'offer' || r.status === 'interview' || ACTIONS[r.company]);
+
+      if (!deals.length) {
+        document.getElementById('sectionPriority').style.display = 'none';
+        return;
+      }
+      document.getElementById('sectionPriority').style.display = 'block';
+
+      container.innerHTML = deals.map(r => {
+        const key = Object.keys(ACTIONS).find(k => String(r.company).includes(k));
+        const act = key ? ACTIONS[key] : { when: 'Entretien en cours', todo: 'Poursuivre le round de qualification et sécuriser les conditions.' };
+        return `
+          <div class="deal-card" onclick="openDrawerById(${r.id})">
+            <div class="deal-top">
+              <span class="deal-company">${esc(r.company)}</span>
+              ${getStatusBadge(r.status)}
+            </div>
+            <div class="deal-role">${esc(r.role || 'Direction / Architecture')} &bull; <span style="color: var(--text-dim);">${esc(r.location || 'Remote')}</span></div>
+            <div class="deal-when">📅 ${esc(act.when)}</div>
+            <div class="deal-todo">${esc(act.todo)}</div>
+            <div style="font-size: 0.78rem; color: #60a5fa; font-weight: 600; margin-top: 0.2rem;">
+              ATS : ${r.ats_score_after ? r.ats_score_after + '%' : '--'} &bull; Rému : ${formatSalary(r.salary_benchmark)}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function getFilteredRows() {
+      return RAW_DATA.filter(r => {
+        // Status filter
+        if (CURRENT_FILTER !== 'all' && r.status !== CURRENT_FILTER) return false;
+
+        // Search query
+        if (SEARCH_QUERY) {
+          const q = SEARCH_QUERY.toLowerCase();
+          const matchCompany = (r.company || '').toLowerCase().includes(q);
+          const matchRole = (r.role || '').toLowerCase().includes(q);
+          const matchLoc = (r.location || '').toLowerCase().includes(q);
+          const matchKeys = (r.keywords || '').toLowerCase().includes(q);
+          const matchPos = (r.positioning || '').toLowerCase().includes(q);
+          if (!matchCompany && !matchRole && !matchLoc && !matchKeys && !matchPos) return false;
+        }
+        return true;
+      }).sort((a, b) => {
+        if (SORT_BY === 'ats_desc') return (b.ats_score_after || 0) - (a.ats_score_after || 0);
+        if (SORT_BY === 'ats_asc') return (a.ats_score_after || 0) - (b.ats_score_after || 0);
+        if (SORT_BY === 'company_asc') return (a.company || '').localeCompare(b.company || '');
+        if (SORT_BY === 'recent') return (b.id || 0) - (a.id || 0);
+        if (SORT_BY === 'status') return (a.status || '').localeCompare(b.status || '');
+        return 0;
+      });
+    }
+
+    function renderListing() {
+      const rows = getFilteredRows();
+
+      // Render Table
+      const tb = document.getElementById('tableBody');
+      if (!rows.length) {
+        tb.innerHTML = `<tr><td colspan="8" style="padding: 2.5rem; text-align: center; color: var(--text-dim);">Aucun dossier ne correspond aux filtres.</td></tr>`;
+      } else {
+        tb.innerHTML = rows.map((r, i) => `
+          <tr class="app-row" onclick="openDrawerById(${r.id})">
+            <td class="col-rank">${i + 1}</td>
+            <td class="col-company"><strong>${esc(r.company)}</strong></td>
+            <td class="col-role">${esc(r.role || '&mdash;')}</td>
+            <td class="col-loc">${esc(r.location || '&mdash;')}</td>
+            <td>${getAtsBadge(r.ats_score_after)}</td>
+            <td>${getStatusBadge(r.status)}</td>
+            <td class="col-remu">${formatSalary(r.salary_benchmark)}</td>
+            <td style="text-align: right;">
+              <button class="nav-btn" style="background: rgba(255,255,255,0.06); padding: 0.3rem 0.65rem; font-size: 0.78rem;" onclick="event.stopPropagation(); openDrawerById(${r.id})">
+                Détails &rarr;
+              </button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      // Render Cards
+      const cg = document.getElementById('cardsViewContainer');
+      cg.innerHTML = rows.map(r => `
+        <div class="app-card" onclick="openDrawerById(${r.id})">
+          <div class="card-head">
+            <div>
+              <div class="card-comp">${esc(r.company)}</div>
+              <div class="card-role">${esc(r.role || '&mdash;')}</div>
+            </div>
+            ${getStatusBadge(r.status)}
+          </div>
+          <div style="font-size: 0.82rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.4rem;">
+            <span>📍</span> ${esc(r.location || 'Remote')}
+          </div>
+          <div style="font-size: 0.84rem; font-weight: 600; color: #60a5fa;">
+            ${formatSalary(r.salary_benchmark)}
+          </div>
+          <div class="card-meta-row">
+            <span>Score ATS : <strong>${r.ats_score_after ? r.ats_score_after + '%' : '--'}</strong></span>
+            <span style="color: var(--primary); font-weight: 600;">Voir la fiche &rarr;</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function handleSearch() {
+      SEARCH_QUERY = document.getElementById('searchInput').value.trim();
+      renderListing();
+    }
+
+    function filterStatus(st) {
+      CURRENT_FILTER = st;
+      document.querySelectorAll('.chip-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.status === st);
+      });
+      renderListing();
+    }
+
+    function handleSort(val) {
+      SORT_BY = val;
+      renderListing();
+    }
+
+    function toggleSort(col) {
+      if (col === 'ats') SORT_BY = (SORT_BY === 'ats_desc') ? 'ats_asc' : 'ats_desc';
+      else if (col === 'company') SORT_BY = 'company_asc';
+      else if (col === 'status') SORT_BY = 'status';
+      document.getElementById('sortSelect').value = SORT_BY;
+      renderListing();
+    }
+
+    function setViewMode(mode) {
+      VIEW_MODE = mode;
+      document.getElementById('btnViewTable').classList.toggle('active', mode === 'table');
+      document.getElementById('btnViewCards').classList.toggle('active', mode === 'cards');
+      document.getElementById('tableViewContainer').style.display = mode === 'table' ? 'block' : 'none';
+      document.getElementById('cardsViewContainer').style.display = mode === 'cards' ? 'grid' : 'none';
+    }
+
+    // Drawer management
+    function openDrawerById(id) {
+      const app = RAW_DATA.find(r => r.id === id);
+      if (!app) return;
+
+      document.getElementById('drawerCompany').textContent = app.company || 'Dossier';
+      document.getElementById('drawerRole').textContent = (app.role || '') + (app.lang ? ` [${app.lang.toUpperCase()}]` : '');
+
+      const after = app.ats_score_after;
+      const before = app.ats_score_before;
+      document.getElementById('drawerAtsScore').textContent = after ? after + '%' : '--';
+      document.getElementById('drawerAtsBefore').textContent = before ? `(Initial : ${before}%)` : '';
+
+      document.getElementById('drawerStatusBadge').innerHTML = getStatusBadge(app.status);
+      document.getElementById('drawerLocation').textContent = app.location || 'Non spécifié';
+
+      // Salary details
+      const sb = app.salary_benchmark;
+      let salaryHtml = '<div style="color: var(--text-dim)">Aucune donnée de benchmark</div>';
+      if (sb) {
+        if (typeof sb === 'string') {
+          salaryHtml = `<div>${esc(sb)}</div>`;
+        } else {
+          salaryHtml = `
+            <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+              ${sb.market_range_monthly_aed ? `<div><strong>Marché AED :</strong> ${esc(sb.market_range_monthly_aed)}</div>` : ''}
+              ${sb.profile_range_monthly_aed ? `<div><strong>Profil AED :</strong> ${esc(sb.profile_range_monthly_aed)}</div>` : ''}
+              ${sb.package_year_eur ? `<div><strong>Package Annuel :</strong> ${esc(sb.package_year_eur)}</div>` : ''}
+              ${sb.range_year_eur ? `<div><strong>Fourchette Annuelle :</strong> ${esc(sb.range_year_eur)} €/an</div>` : ''}
+              ${sb.base_year_eur ? `<div><strong>Salaire Base :</strong> ${esc(sb.base_year_eur)} €</div>` : ''}
+              ${sb.day_rate ? `<div><strong>Taux Journalier (TJM) :</strong> ${esc(sb.day_rate)} €/j</div>` : ''}
+              ${sb.factors ? `<div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem;"><em>Facteurs :</em> ${esc(sb.factors)}</div>` : ''}
+              ${sb.sources ? `<div style="font-size: 0.76rem; color: var(--text-dim);"><em>Sources :</em> ${esc(sb.sources)}</div>` : ''}
+            </div>
+          `;
+        }
+      }
+      document.getElementById('drawerSalary').innerHTML = salaryHtml;
+
+      // Positioning
+      document.getElementById('drawerPositioning').textContent = app.positioning || 'Positionnement standard Direction Technique & Architecture IA.';
+
+      // Company Analysis
+      const compSection = document.getElementById('drawerCompanySection');
+      if (app.company_analysis) {
+        compSection.style.display = 'flex';
+        document.getElementById('drawerCompanyAnalysis').textContent = app.company_analysis;
+      } else {
+        compSection.style.display = 'none';
+      }
+
+      // Hard Gates & Keywords
+      const gatesSection = document.getElementById('drawerGatesSection');
+      if (app.hard_gates || app.keywords) {
+        gatesSection.style.display = 'flex';
+        let gatesHtml = '';
+        if (app.hard_gates) gatesHtml += `<div><strong>Critères clés :</strong> ${esc(app.hard_gates)}</div>`;
+        if (app.keywords) gatesHtml += `<div style="margin-top: 0.4rem; font-size: 0.8rem; color: var(--text-muted);"><strong>Mots-clés :</strong> ${esc(app.keywords)}</div>`;
+        document.getElementById('drawerGates').innerHTML = gatesHtml;
+      } else {
+        gatesSection.style.display = 'none';
+      }
+
+      // Job Spec
+      const specSection = document.getElementById('drawerSpecSection');
+      if (app.job_spec) {
+        specSection.style.display = 'flex';
+        document.getElementById('drawerJobSpec').textContent = app.job_spec;
+      } else {
+        specSection.style.display = 'none';
+      }
+
+      document.getElementById('drawerOverlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawer() {
+      document.getElementById('drawerOverlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target === document.getElementById('drawerOverlay')) {
+        closeDrawer();
+      }
+    }
+
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeDrawer();
+    });
+
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      document.getElementById('themeIcon').textContent = next === 'dark' ? '☀️' : '🌙';
+      localStorage.setItem('candidatures_theme', next);
+    }
+
+    // Init theme from storage
+    const savedTheme = localStorage.getItem('candidatures_theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      document.getElementById('themeIcon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    }
+
+    // Initial load
+    loadApplications();
+  </script>
 </body>
 </html>

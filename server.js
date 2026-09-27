@@ -1,54 +1,115 @@
 // CV dashboard — serves a live view of cv_applications from OCI PostgREST.
-// The service key stays server-side (env). The page calls /api/applications.
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const url = require('url');
 
 const PORT = process.env.PORT || 3000;
-// CV_DB_* are the accurate names: this is PostgREST on the OCI host, not Supabase.
-// The SUPABASE_* names stay as a fallback so a redeploy does not break before the
-// Coolify variables are renamed.
 const BASE = (process.env.CV_DB_URL || process.env.SUPABASE_URL || 'https://arx-mcp.duckdns.org/db-cv').replace(/\/$/, '');
 const KEY = process.env.CV_DB_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 
-const INDEX = fs.readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf8');
+const PUBLIC_DIR = path.join(__dirname, 'public');
+
+const MIME_TYPES = {
+  '.html': 'text/html; charset=utf-8',
+  '.js': 'application/javascript; charset=utf-8',
+  '.json': 'application/json; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.svg': 'image/svg+xml',
+  '.ico': 'image/x-icon'
+};
 
 async function fetchApplications() {
-  const url = `${BASE}/rest/v1/cv_applications?select=company,role,location,ats_score_after,status,salary_benchmark&order=ats_score_after.desc.nullslast,company.asc`;
-  const r = await fetch(url, { headers: { Authorization: `Bearer ${KEY}`, apikey: KEY } });
-  if (!r.ok) throw new Error(`PostgREST ${r.status}`);
+  const fields = [
+    'id', 'company', 'role', 'location', 'lang', 'job_spec', 'keywords',
+    'hard_gates', 'positioning', 'company_analysis', 'ats_score_before',
+    'ats_score_after', 'cv_notes', 'cover_letter', 'status', 'created_at',
+    'updated_at', 'salary_benchmark'
+  ].join(',');
+  const queryUrl = `${BASE}/rest/v1/cv_applications?select=${fields}&order=ats_score_after.desc.nullslast,company.asc`;
+  const r = await fetch(queryUrl, {
+    headers: { Authorization: `Bearer ${KEY}`, apikey: KEY }
+  });
+  if (!r.ok) throw new Error(`PostgREST error ${r.status}`);
   return r.json();
 }
 
 const server = http.createServer(async (req, res) => {
-  // Coolify strips any path prefix, so we match on the tail.
-  const url = req.url.split('?')[0].replace(/\/+$/, '') || '/';
-  if (url.endsWith('/api/applications')) {
+  const parsedUrl = url.parse(req.url, true);
+  let pathname = parsedUrl.pathname || '/';
+
+  // Domain redirect from arx-sites.duckdns.org to https://arx-consulting.com/candidatures
+  const host = (req.headers.host || '').toLowerCase();
+  if (host.includes('arx-sites.duckdns.org')) {
+    const cleanPath = pathname.startsWith('/candidatures') ? pathname : '/candidatures' + pathname;
+    const dest = 'https://arx-consulting.com' + cleanPath + (parsedUrl.search || '');
+    res.writeHead(301, { 'Location': dest });
+    res.end();
+    return;
+  }
+
+  // Handle prefix stripping if mounted on /candidatures
+  if (pathname === '/candidatures') {
+    res.writeHead(301, { 'Location': '/candidatures/' + (parsedUrl.search || '') });
+    res.end();
+    return;
+  }
+  if (pathname.startsWith('/candidatures/')) {
+    pathname = pathname.slice('/candidatures'.length) || '/';
+  }
+
+  // API: Applications
+  if (pathname === '/api/applications') {
     try {
       const rows = await fetchApplications();
-      res.writeHead(200, { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' });
+      res.writeHead(200, {
+        'Content-Type': 'application/json; charset=utf-8',
+        'Cache-Control': 'no-store'
+      });
       res.end(JSON.stringify({ ok: true, count: rows.length, updated: new Date().toISOString(), rows }));
     } catch (e) {
-      res.writeHead(502, { 'Content-Type': 'application/json' });
+      res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' });
       res.end(JSON.stringify({ ok: false, error: String(e.message || e) }));
     }
     return;
   }
-  if (url.endsWith('/health')) {
-    res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.end('ok');
+
+  // Health check
+  if (pathname === '/health' || pathname === '/sante') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ status: 'ok', service: 'cv-dashboard' }));
     return;
   }
-  if (url.endsWith('/favicon.ico') || url.endsWith('/favicon.png')) {
-    const file = path.join(__dirname, 'public', path.basename(url));
-    if (fs.existsSync(file)) {
-      res.writeHead(200, { 'Content-Type': url.endsWith('.ico') ? 'image/x-icon' : 'image/png', 'Cache-Control': 'public, max-age=86400' });
-      res.end(fs.readFileSync(file));
-      return;
-    }
+
+  // Static Assets (including subdirectories like assets/...)
+  let safePath = path.normalize(pathname).replace(/^(\.\.[\/\\])+/, '');
+  if (safePath.startsWith('/') || safePath.startsWith('\\')) safePath = safePath.slice(1);
+  const filePath = path.join(PUBLIC_DIR, safePath || 'index.html');
+
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+    const ext = path.extname(filePath).toLowerCase();
+    const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+    const isCacheable = ext === '.png' || ext === '.ico' || ext === '.svg';
+    res.writeHead(200, {
+      'Content-Type': contentType,
+      'Cache-Control': isCacheable ? 'public, max-age=86400' : 'no-cache'
+    });
+    fs.createReadStream(filePath).pipe(res);
+    return;
   }
-  res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
-  res.end(INDEX);
+
+  // Fallback to index.html for root or SPA navigation
+  const indexPath = path.join(PUBLIC_DIR, 'index.html');
+  if (fs.existsSync(indexPath)) {
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8', 'Cache-Control': 'no-cache' });
+    fs.createReadStream(indexPath).pipe(res);
+    return;
+  }
+
+  res.writeHead(404, { 'Content-Type': 'text/plain' });
+  res.end('Not found');
 });
 
 server.listen(PORT, () => console.log(`cv-dashboard on :${PORT} -> ${BASE}`));
