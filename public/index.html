@@ -736,10 +736,110 @@
     }
     @keyframes spinAnim { to { transform: rotate(360deg); } }
 
+    /* ---- Clickable KPI & Modal Styles ---- */
+    .clickable-kpi {
+      cursor: pointer;
+      position: relative;
+      transition: var(--transition);
+    }
+    .clickable-kpi:hover {
+      border-color: rgba(0, 113, 227, 0.4);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-elevated);
+    }
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+      z-index: 1200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal-panel {
+      background: var(--apple-card);
+      width: 100%;
+      max-width: 640px;
+      max-height: 85vh;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: modalPop 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.96) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-header {
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fafafa;
+    }
+    .modal-body {
+      padding: 1.25rem 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .interview-item {
+      background: #ffffff;
+      border: 1px solid var(--border-hairline);
+      border-left: 4px solid var(--apple-blue);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .interview-item:hover {
+      border-color: var(--apple-blue);
+      transform: translateX(3px);
+    }
+    .interview-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .interview-item-company {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text-primary);
+    }
+    .interview-item-role {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+    .interview-timing-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: #0066cc;
+      background: #e8f2fe;
+      padding: 0.3rem 0.65rem;
+      border-radius: 6px;
+      align-self: flex-start;
+    }
+
     @media (max-width: 768px) {
       .nav-container { flex-direction: column; align-items: flex-start; }
       .drawer-panel { max-width: 100%; }
       .priority-grid { grid-template-columns: 1fr; }
+      .modal-panel { max-width: 100%; }
     }
   </style>
 </head>
@@ -798,9 +898,9 @@
     <!-- KPI Summary Grid -->
     <div class="kpi-row">
       <div class="kpi-card">
-        <span class="kpi-label">Dossiers Totaux</span>
+        <span class="kpi-label">Dossiers &amp; Pipeline</span>
         <span class="kpi-value" id="kpiTotal">0</span>
-        <span class="kpi-desc">Base PostgREST db-cv</span>
+        <span class="kpi-desc" id="kpiPipelineSub">0 en attente &bull; 0 rejets</span>
       </div>
 
       <div class="kpi-card">
@@ -821,10 +921,13 @@
         <span class="kpi-desc">TJM 900 &ndash; 1 200 €/j</span>
       </div>
 
-      <div class="kpi-card">
-        <span class="kpi-label">En Attente / Rejetés</span>
-        <span class="kpi-value" id="kpiSentPending">0</span>
-        <span class="kpi-desc" id="kpiSentSub">Pipeline actif</span>
+      <div class="kpi-card clickable-kpi" id="kpiInterviewsCard" onclick="openInterviewsModal()" title="Cliquer pour afficher le planning des entretiens">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span class="kpi-label">Entretiens à Venir</span>
+          <span style="font-size: 0.72rem; color: var(--apple-blue); font-weight: 600; text-transform: none;">Planning &rarr;</span>
+        </div>
+        <span class="kpi-value" id="kpiUpcomingCount" style="color: var(--apple-blue);">0</span>
+        <span class="kpi-desc" id="kpiUpcomingSub">Voir jours &amp; heures</span>
       </div>
     </div>
 
@@ -995,6 +1098,24 @@
     </div>
   </div>
 
+  <!-- Upcoming Interviews & Calendar Modal -->
+  <div class="modal-overlay" id="interviewsModalOverlay" onclick="handleModalBackdropClick(event)">
+    <div class="modal-panel">
+      <div class="modal-header">
+        <div>
+          <div style="font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em;">📅 Planning des Entretiens &amp; RDV</div>
+          <div style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.2rem;">Dates, jours, heures et contacts recruteurs identifiés</div>
+        </div>
+        <button class="drawer-close" onclick="closeInterviewsModal()" title="Fermer">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+      <div class="modal-body" id="interviewsListContainer">
+        <!-- Dynamically populated -->
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="app-footer">
     <div>Arx Consulting &bull; Pipeline Exécutif</div>
@@ -1096,6 +1217,10 @@
       document.getElementById('kpiTotal').textContent = total;
       document.getElementById('countBadge').textContent = total;
 
+      const sent = RAW_DATA.filter(r => r.status === 'sent').length;
+      const rejected = RAW_DATA.filter(r => r.status === 'rejected').length;
+      document.getElementById('kpiPipelineSub').textContent = `${sent} en attente · ${rejected} rejets`;
+
       const interviews = RAW_DATA.filter(r => r.status === 'interview' || r.status === 'offer').length;
       document.getElementById('kpiInterviews').textContent = interviews;
 
@@ -1105,10 +1230,14 @@
       document.getElementById('kpiAtsMax').textContent = maxScore + '%';
       document.getElementById('kpiAtsAvg').textContent = `Moyenne : ${avgScore}% (${scores.length} qualifiés)`;
 
-      const sent = RAW_DATA.filter(r => r.status === 'sent').length;
-      const rejected = RAW_DATA.filter(r => r.status === 'rejected').length;
-      document.getElementById('kpiSentPending').textContent = `${sent} / ${rejected}`;
-      document.getElementById('kpiSentSub').textContent = `${sent} envoyés · ${rejected} rejets`;
+      const interviewDeals = RAW_DATA.filter(r => 
+        r.status === 'interview' || 
+        r.status === 'offer' || 
+        ACTIONS[r.company] || 
+        Object.keys(ACTIONS).some(k => String(r.company).toLowerCase().includes(k.toLowerCase()))
+      );
+      document.getElementById('kpiUpcomingCount').textContent = interviewDeals.length;
+      document.getElementById('kpiUpcomingSub').textContent = `${interviewDeals.length} calés ou en cours`;
 
       // 2. Chip counts
       const counts = { all: total, offer: 0, interview: 0, sent: 0, draft: 0, rejected: 0 };
@@ -1360,8 +1489,71 @@
       }
     }
 
+    // Interviews Modal management
+    function openInterviewsModal() {
+      renderInterviewsModal();
+      document.getElementById('interviewsModalOverlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeInterviewsModal() {
+      document.getElementById('interviewsModalOverlay').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function handleModalBackdropClick(e) {
+      if (e.target === document.getElementById('interviewsModalOverlay')) {
+        closeInterviewsModal();
+      }
+    }
+
+    function renderInterviewsModal() {
+      const container = document.getElementById('interviewsListContainer');
+      const interviewDeals = RAW_DATA.filter(r => 
+        r.status === 'interview' || 
+        r.status === 'offer' || 
+        ACTIONS[r.company] || 
+        Object.keys(ACTIONS).some(k => String(r.company).toLowerCase().includes(k.toLowerCase()))
+      );
+
+      if (!interviewDeals.length) {
+        container.innerHTML = '<div style="text-align: center; color: var(--text-tertiary); padding: 2rem;">Aucun entretien programmé pour l\'instant.</div>';
+        return;
+      }
+
+      container.innerHTML = interviewDeals.map(r => {
+        const key = Object.keys(ACTIONS).find(k => String(r.company).toLowerCase().includes(k.toLowerCase()));
+        const act = key ? ACTIONS[key] : null;
+        const timing = act ? act.when : 'Entretien en cours';
+        const todo = act ? act.todo : (r.cv_notes || 'Qualification et suivi du processus.');
+
+        return `
+          <div class="interview-item" onclick="closeInterviewsModal(); openDrawerById('${esc(r.id)}');">
+            <div class="interview-item-top">
+              <span class="interview-item-company">${esc(r.company)}</span>
+              ${getStatusBadge(r.status)}
+            </div>
+            <div class="interview-item-role">${esc(r.role || 'Direction Technique')} &bull; <span style="color: var(--text-tertiary);">${esc(r.location || 'Remote')}</span></div>
+            <div class="interview-timing-pill">
+              🕒 <span>${esc(timing)}</span>
+            </div>
+            <div style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.45; margin-top: 0.2rem;">
+              ${esc(todo)}
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.35rem; font-size: 0.78rem;">
+              <span style="color: var(--apple-blue); font-weight: 500;">Rému : ${formatSalary(r.salary_benchmark)}</span>
+              <span style="color: var(--apple-blue); font-weight: 600;">Ouvrir la fiche &rarr;</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
     window.addEventListener('keydown', e => {
-      if (e.key === 'Escape') closeDrawer();
+      if (e.key === 'Escape') {
+        closeDrawer();
+        closeInterviewsModal();
+      }
     });
 
     // Initial load
