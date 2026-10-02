@@ -759,16 +759,25 @@
           </div>
         </a>
 
-        <!-- Cross Navigation Links (Contacts & Monitor) -->
+        <!-- Cross Navigation Links (Job Radar, Contacts & Monitor) -->
         <div class="nav-links">
-          <a href="/contacts/" class="nav-link-btn" title="Répertoire Décideurs Région Sud">
+          <a href="https://arx-consulting.com/contact-paca/jobs.html" class="nav-link-btn" style="border-color: rgba(16, 185, 129, 0.4); color: var(--emerald);" title="AI Job radar (767+ offres vectorisées)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            <span>AI Job radar</span>
+          </a>
+          <a href="https://arx-consulting.com/contact-paca/" class="nav-link-btn" title="Répertoire Décideurs Région Sud">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-            <span>Contacts</span>
+            <span>Réseau</span>
           </a>
 
-          <a href="/contacts/monitor.html" class="nav-link-btn" title="Supervision Scraper Oracle ATP">
+          <a href="https://arx-consulting.com/contact-paca/monitor.html" class="nav-link-btn" title="Supervision Scraper Oracle ATP">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
             <span>Scraper Monitor</span>
+          </a>
+
+          <a href="/asebc" target="_blank" rel="noopener noreferrer" class="nav-link-btn" style="border-color: rgba(0, 113, 227, 0.35); color: var(--apple-blue); background: rgba(0, 113, 227, 0.05);" title="Association Solidarité Emploi du Bassin Cannois (A.S.E.B.C.)">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Solidarité Emploi</span>
           </a>
         </div>
       </div>
@@ -954,6 +963,12 @@
         <div class="drawer-box" id="drawerSalary">--</div>
       </div>
 
+      <!-- Notes, Discussions & Meeting Status -->
+      <div class="drawer-section" id="drawerNotesSection">
+        <div class="drawer-section-title" style="color: var(--apple-blue);">Échanges, Suivi &amp; Rendez-vous</div>
+        <div class="drawer-box" id="drawerNotes" style="border-left: 3px solid var(--apple-blue); font-weight: 500;">--</div>
+      </div>
+
       <!-- Strategy & Positioning -->
       <div class="drawer-section">
         <div class="drawer-section-title">Positionnement Stratégique</div>
@@ -988,12 +1003,15 @@
 
   <script>
     const ACTIONS = {
+      'Allianz': { when:'RDV proposé (Mardi 6 oct)', todo:'Invitation reçue de Tania Koshkina (Recruiter Allianz Technology Barcelone). Entretien de qualification pour le poste Enterprise Architect.' },
       'LTM': { when:'Right to Represent signé (13/08)', todo:'Screening passé, mandat exclusif signé. Rému mini 140-150 k€ base. Sai soumet le profil au client LTIMindtree.' },
       '3Point': { when:'Accord Mike Connaughton (CTO)', todo:'Démarrage contractor puis salariat £150k base + 20 % bonus (package £180k ≈ 212 k€). TJM 900-1000 £/j.' },
       'Accenture': { role:'Senior Manager', when:'Screen RH passé', todo:'Screen RH passé (Magdalena Gurau). En attente du retour / prochain round.' },
       'WA.Technology': { when:'Entretien RH réalisé', todo:'Entretien passé (Zsofia + Manon), retour positif, suivi envoyé.' },
       'Infotel': { when:'À caler', todo:'Infotel Monaco (Sandrine Tixier) demande un 1er échange téléphonique (parcours + attentes).' },
-      'Church': { when:'Chez le hiring manager', todo:'Candidature transmise au hiring manager (BNP). Démarrage prévu 15/09.' }
+      'Church': { when:'Chez le hiring manager', todo:'Candidature transmise au hiring manager (BNP). Démarrage prévu 15/09.' },
+      'Matawan': { when:'RDV en cours de calage (Nesrine)', todo:'Candidature transmise. Échange téléphonique de cadrage mission Architecte Solutions IA région.' },
+      'Societe Generale': { when:'Candidature transmise', todo:'Poste Chief IA Architect Groupe (Design Authority, filière 400 pers., IA agentique & plateforme hybride).' }
     };
 
     const STATUS_MAP = {
@@ -1116,7 +1134,7 @@
 
     function renderPriorityDeals() {
       const container = document.getElementById('priorityContainer');
-      const deals = RAW_DATA.filter(r => r.status === 'offer' || r.status === 'interview' || ACTIONS[r.company]);
+      const deals = RAW_DATA.filter(r => r.status === 'offer' || r.status === 'interview' || ACTIONS[r.company] || Object.keys(ACTIONS).some(k => String(r.company).toLowerCase().includes(k.toLowerCase())));
 
       if (!deals.length) {
         document.getElementById('sectionPriority').style.display = 'none';
@@ -1125,10 +1143,10 @@
       document.getElementById('sectionPriority').style.display = 'block';
 
       container.innerHTML = deals.map(r => {
-        const key = Object.keys(ACTIONS).find(k => String(r.company).includes(k));
+        const key = Object.keys(ACTIONS).find(k => String(r.company).toLowerCase().includes(k.toLowerCase()));
         const act = key ? ACTIONS[key] : { when: 'Entretien en cours', todo: 'Qualification et suivi du processus.' };
         return `
-          <div class="priority-card" onclick="openDrawerById(${r.id})">
+          <div class="priority-card" onclick="openDrawerById('${esc(r.id)}')">
             <div class="priority-top">
               <span class="priority-company">${esc(r.company)}</span>
               ${getStatusBadge(r.status)}
@@ -1152,16 +1170,18 @@
           const matchCompany = (r.company || '').toLowerCase().includes(q);
           const matchRole = (r.role || '').toLowerCase().includes(q);
           const matchLoc = (r.location || '').toLowerCase().includes(q);
-          const matchKeys = (r.keywords || '').toLowerCase().includes(q);
+          const matchKeys = (typeof r.keywords === 'string' ? r.keywords : JSON.stringify(r.keywords || '')).toLowerCase().includes(q);
           const matchPos = (r.positioning || '').toLowerCase().includes(q);
-          if (!matchCompany && !matchRole && !matchLoc && !matchKeys && !matchPos) return false;
+          const matchNotes = (r.cv_notes || '').toLowerCase().includes(q);
+          const matchAnalysis = (r.company_analysis || '').toLowerCase().includes(q);
+          if (!matchCompany && !matchRole && !matchLoc && !matchKeys && !matchPos && !matchNotes && !matchAnalysis) return false;
         }
         return true;
       }).sort((a, b) => {
         if (SORT_BY === 'ats_desc') return (b.ats_score_after || 0) - (a.ats_score_after || 0);
         if (SORT_BY === 'ats_asc') return (a.ats_score_after || 0) - (b.ats_score_after || 0);
         if (SORT_BY === 'company_asc') return (a.company || '').localeCompare(b.company || '');
-        if (SORT_BY === 'recent') return (b.id || 0) - (a.id || 0);
+        if (SORT_BY === 'recent') return String(b.updated_at || b.created_at || '').localeCompare(String(a.updated_at || a.created_at || ''));
         if (SORT_BY === 'status') return (a.status || '').localeCompare(b.status || '');
         return 0;
       });
@@ -1176,7 +1196,7 @@
         tb.innerHTML = `<tr><td colspan="8" style="padding: 2.5rem; text-align: center; color: var(--text-tertiary);">Aucun dossier ne correspond aux critères.</td></tr>`;
       } else {
         tb.innerHTML = rows.map((r, i) => `
-          <tr class="app-row" onclick="openDrawerById(${r.id})">
+          <tr class="app-row" onclick="openDrawerById('${esc(r.id)}')">
             <td class="col-rank">${i + 1}</td>
             <td class="col-company">${esc(r.company)}</td>
             <td class="col-role">${esc(r.role || '&mdash;')}</td>
@@ -1194,7 +1214,7 @@
       // Render Cards
       const cg = document.getElementById('cardsViewContainer');
       cg.innerHTML = rows.map(r => `
-        <div class="app-card" onclick="openDrawerById(${r.id})">
+        <div class="app-card" onclick="openDrawerById('${esc(r.id)}')">
           <div class="card-head">
             <div>
               <div class="card-comp">${esc(r.company)}</div>
@@ -1252,7 +1272,7 @@
 
     // Drawer management
     function openDrawerById(id) {
-      const app = RAW_DATA.find(r => r.id === id);
+      const app = RAW_DATA.find(r => String(r.id) === String(id));
       if (!app) return;
 
       document.getElementById('drawerCompany').textContent = app.company || 'Dossier';
@@ -1287,6 +1307,14 @@
         }
       }
       document.getElementById('drawerSalary').innerHTML = salaryHtml;
+
+      const notesSection = document.getElementById('drawerNotesSection');
+      if (app.cv_notes) {
+        notesSection.style.display = 'flex';
+        document.getElementById('drawerNotes').textContent = app.cv_notes;
+      } else {
+        notesSection.style.display = 'none';
+      }
 
       document.getElementById('drawerPositioning').textContent = app.positioning || 'Positionnement Direction Technique & Architecture IA.';
 
