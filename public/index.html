@@ -1141,11 +1141,14 @@
         company: 'Allianz Technology',
         role: 'Enterprise Architect — AI & Data',
         location: 'Barcelone (Hybride)',
-        scheduledDate: '2026-10-06T14:00:00+02:00',
+        scheduledDate: '2026-10-06T14:35:00+02:00',
         displayDate: 'Mardi 6 oct. 2026',
-        displayTime: 'Dès 14:00 CEST',
-        contact: 'Tania KOSHKINA (Recruiter Allianz Technology Barcelona, tetiana.koshkina@allianz.com)',
-        topic: 'Entretien de qualification pour le poste Enterprise Architect AI & Data.'
+        displayTime: '14:35 – 15:00 (CEST)',
+        contact: 'Tania KOSHKINA (Recruiter Allianz Technology Barcelona, tetiana.koshkina@allianz.com, +34699922190)',
+        topic: 'Entretien RH confirmé sur Microsoft Teams — Poste Enterprise Architect AI & Data.',
+        teamsUrl: 'https://teams.microsoft.com/meet/327409029509247?p=9tOMkcTAN216BzNFQH',
+        meetingId: '327 409 029 509 247',
+        passcode: 'bk6vz6UU'
       }
     ];
 
@@ -1167,8 +1170,8 @@
     }
 
     const ACTIONS = {
-      'Allianz': { when:'RDV fixé (Mardi 6 oct dès 14h)', todo:'Invitation reçue de Tania Koshkina (Recruiter Allianz Technology Barcelone). Entretien de qualification pour le poste Enterprise Architect.' },
-      'Matawan': { when:'RDV fixé (Aujourd’hui 14h-14h30)', todo:'Invitation reçue de Nesrine Bouazza. Échange téléphonique de cadrage mission Architecte Solutions IA région.' },
+      'Allianz': { when:'RDV Teams confirmé (Mardi 6 oct 14h35-15h00)', todo:'Entretien RH avec Tania Koshkina sur Microsoft Teams pour le poste Enterprise Architect AI & Data (Barcelone).' },
+      'Matawan': { when:'RDV fixé (Aujourd’hui 14h00-14h30)', todo:'Échange téléphonique de cadrage avec Nesrine Bouazza pour la mission Architecte Solutions IA.' },
       'LTM': { when:'Right to Represent signé (13/08)', todo:'Screening passé, mandat exclusif signé. Rému mini 140-150 k€ base. Sai soumet le profil au client LTIMindtree.' },
       '3Point': { when:'Accord Mike Connaughton (CTO)', todo:'Démarrage contractor puis salariat £150k base + 20 % bonus (package £180k ≈ 212 k€). TJM 900-1000 £/j.' },
       'Accenture': { role:'Senior Manager', when:'Screen RH passé', todo:'Screen RH passé (Magdalena Gurau). En attente du retour / prochain round.' },
@@ -1568,6 +1571,16 @@
             <strong>Contact :</strong> ${esc(item.contact)}<br>
             <strong>Objet :</strong> ${esc(item.topic)}
           </div>
+          ${item.teamsUrl ? `
+            <div style="margin-top: 0.45rem; padding: 0.6rem 0.8rem; background: #f0f7ff; border: 1px solid #cce4ff; border-radius: 8px; font-size: 0.8rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <a href="${item.teamsUrl}" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.35rem; background: var(--apple-blue); color: #fff; padding: 0.35rem 0.8rem; border-radius: 6px; font-weight: 600; text-decoration: none; font-size: 0.78rem;" onclick="event.stopPropagation();">
+                  <span>Rejoindre la réunion Teams</span> &rarr;
+                </a>
+                <span style="color: var(--text-secondary); font-size: 0.74rem;">ID: <strong>${item.meetingId}</strong> &bull; Code: <strong>${item.passcode}</strong></span>
+              </div>
+            </div>
+          ` : ''}
           <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.35rem; font-size: 0.78rem;">
             <span style="color: var(--apple-blue); font-weight: 500;">${item.salary_benchmark ? 'Rému : ' + formatSalary(item.salary_benchmark) : ''}</span>
             <span style="color: var(--apple-blue); font-weight: 600;">Ouvrir la fiche dossier &rarr;</span>
